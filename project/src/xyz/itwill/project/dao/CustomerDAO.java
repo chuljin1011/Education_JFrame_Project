@@ -39,7 +39,7 @@ public class CustomerDAO extends JdbcDAO {
 			pstmt.setString(3, customer.getBirth());
 			pstmt.setString(4, customer.getName());
 			pstmt.setString(5, customer.getGender());
-			pstmt.setString(5, customer.getPhone());
+			pstmt.setString(6, customer.getPhone());
 			pstmt.setString(7, customer.getJoin_date());
 			pstmt.setInt(8, customer.getUsed_count());
 			pstmt.setString(9, customer.getMemo());
