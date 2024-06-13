@@ -47,7 +47,7 @@ public class DesignerDAO extends JdbcDAO {
 
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]insertDesigner() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt);
 		}
@@ -63,7 +63,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "update designer set pw=?,birth=?,name=?,gender=?,rank=?,sal=?,hire_date=?,phone=?,carrer=?,id=?, where id=?";
+			String sql = "update designer set pw=?,birth=?,name=?,gender=?,phone=?,rank=?,sal=?,hire_date=?,carrer=?,id=?, where id=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, designer.getPw());
@@ -79,7 +79,7 @@ public class DesignerDAO extends JdbcDAO {
 
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]updateDesigner() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt);
 		}
@@ -101,7 +101,7 @@ public class DesignerDAO extends JdbcDAO {
 
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]deleteDesigner() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt);
 		}
@@ -118,7 +118,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select id,pw,birth,name,gender,rank,sal,hire_date,phone,carrer from designer where id = ?";
+			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,carrer from designer where id = ?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
@@ -141,7 +141,7 @@ public class DesignerDAO extends JdbcDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]selectDesignerByID() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt, rs);
 		}
@@ -183,7 +183,7 @@ public class DesignerDAO extends JdbcDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]selectDesignerByName() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt, rs);
 		}
@@ -223,19 +223,10 @@ public class DesignerDAO extends JdbcDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("[에러]insertStudent() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]selectDesignerAll() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt, rs);
 		}
 		return designerList;
 	}
 }
-
-
-
-
-
-
-
-
-
