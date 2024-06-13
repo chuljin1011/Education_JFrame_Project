@@ -23,8 +23,8 @@ public abstract class JdbcDAO {
 		try {
 			pds.setConnectionFactoryClassName("oracle.jdbc.driver.OracleDriver");
 			pds.setURL("jdbc:oracle:thin:@localhost:1521:xe");
-			pds.setUser("scott");
-			pds.setPassword("tiger");
+			pds.setUser("team22");
+			pds.setPassword("pass123");
 			pds.setInitialPoolSize(10);
 			pds.setMaxPoolSize(15);
 		} catch (SQLException e) {
