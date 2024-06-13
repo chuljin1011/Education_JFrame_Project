@@ -1,23 +1,21 @@
 package xyz.itwill.project;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 
 
 public class MemberLogin extends JFrame {
@@ -27,27 +25,20 @@ public class MemberLogin extends JFrame {
 	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
+	private String login_id;
+	private String login_name;
+ 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MemberLogin frame = new MemberLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public MemberLogin(String login_id, String login_name) {
+		
+		// code 검증부
 
-	/**
-	 * Create the frame.
-	 */
-	public MemberLogin() {
+		this.login_id = login_id;
+		this.login_name = login_name;
+		System.out.println(login_id);
+		System.out.println(login_name);
+		
+		//
 		setTitle("회원 로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);

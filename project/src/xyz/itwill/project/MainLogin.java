@@ -1,33 +1,48 @@
 package xyz.itwill.project;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
-import javax.swing.JTextField;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import xyz.itwill.project.dao.CustomerDAO;
+import xyz.itwill.project.dao.CustomerDTO;
+import xyz.itwill.project.dao.DesignerDAO;
+import xyz.itwill.project.dao.DesignerDTO;
 
 public class MainLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField idField;
+	private JTextField pwField;
 	private JCheckBox chckbxMember;
 	private JCheckBox chckbxAdmin;
 	private JButton btnNewButton_2;
+	private MemberLogin memberLogin;
+	String login_id;
+	String login_name;
+	
+
+//	public String getLogin_id() {
+//		return login_id;
+//	}
+//
+//	public String getLogin_name() {
+//		return login_name;
+//	}
+
 
 	/**
 	 * Launch the application.
@@ -72,15 +87,15 @@ public class MainLogin extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 3;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 2;
-		gbc_textField.gridy = 1;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		idField = new JTextField();
+		GridBagConstraints gbc_idField = new GridBagConstraints();
+		gbc_idField.gridwidth = 3;
+		gbc_idField.insets = new Insets(0, 0, 5, 5);
+		gbc_idField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_idField.gridx = 2;
+		gbc_idField.gridy = 1;
+		contentPane.add(idField, gbc_idField);
+		idField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("비밀번호");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -90,15 +105,15 @@ public class MainLogin extends JFrame {
 		gbc_lblNewLabel_1.gridy = 2;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridwidth = 3;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 2;
-		contentPane.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		pwField = new JTextField();
+		GridBagConstraints gbc_pwField = new GridBagConstraints();
+		gbc_pwField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pwField.gridwidth = 3;
+		gbc_pwField.insets = new Insets(0, 0, 5, 5);
+		gbc_pwField.gridx = 2;
+		gbc_pwField.gridy = 2;
+		contentPane.add(pwField, gbc_pwField);
+		pwField.setColumns(10);
 		
 		chckbxMember = new JCheckBox("회원");
 		GridBagConstraints gbc_chckbxMember = new GridBagConstraints();
@@ -137,6 +152,7 @@ public class MainLogin extends JFrame {
 		    }
 		});
 		
+		
 		JButton btnNewButton = new JButton("로그인");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,6 +162,8 @@ public class MainLogin extends JFrame {
 				}
 			}
 		});
+		
+		
 		
 		btnNewButton_2 = new JButton("비회원");
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
@@ -170,22 +188,58 @@ public class MainLogin extends JFrame {
 		
 		btnNewButton.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		    	String username = textField.getText();
-		        String password = textField_1.getText();
+		    	String username = idField.getText();
+		        String password = pwField.getText();
 		    	
 		    	if (username.trim().isEmpty() || password.trim().isEmpty()) {
 		             JOptionPane.showMessageDialog(MainLogin.this, "아이디나 비밀번호를 입력하세요.", "경고", JOptionPane.WARNING_MESSAGE);
 		             return;
 		    	}		    	
 		    	
-		        if (chckbxMember.isSelected()) {		            
-		        	MemberLogin memberLogin = new MemberLogin();
-		        	memberLogin.setVisible(true);
-		        	setVisible(false);
-		        } else if (chckbxAdmin.isSelected()) {		           
-		        	AdministratorLogin administratorLogin = new AdministratorLogin();
-		        	administratorLogin.setVisible(true);
-		        	setVisible(false);
+		    	login_id = idField.getText();   // id 저장
+		    	
+		        if (chckbxMember.isSelected()) {	// 손님 로그인      	
+		        	
+		        	CustomerDTO customr = CustomerDAO.getDAO().selectCustomerByID(login_id);
+		        	if(customr == null) {	// 해당 id가 존재하지 않는경우
+		    			JOptionPane.showMessageDialog(null, "ID가 존재하지 않습니다.");
+		    			idField.requestFocus();
+		    			return;
+		        	}
+		        	
+		        	login_name = customr.getName();        
+		        	if(customr.getPw().equals(pwField.getText())) {
+		        		memberLogin = new MemberLogin(login_id, login_name);
+		        		memberLogin.setVisible(true);
+		        		setVisible(false);
+		        		
+		        	} else {
+		        		JOptionPane.showMessageDialog(null, "비밀번호가 맞지 않습니다.");
+		        		pwField.requestFocus();
+		        	}
+		        	
+
+		        	
+		        } else if (chckbxAdmin.isSelected()) {	// 관리자 로그인
+		        	
+		        	DesignerDTO designer = DesignerDAO.getDAO().selectDesignerByID(login_id);
+		        	if(designer == null) {	// 해당 id가 존재하지 않는경우
+		    			JOptionPane.showMessageDialog(MainLogin.this, "ID가 존재하지 않습니다.");
+		    			idField.requestFocus();
+		    			return;
+		        	}
+		        	
+		        	login_name = designer.getName();        
+		        	if(designer.getPw().equals(pwField.getText())) {
+			        	AdministratorLogin administratorLogin = new AdministratorLogin();
+			        	administratorLogin.setVisible(true);
+		        		setVisible(false);
+		        		
+		        	} else {
+		        		JOptionPane.showMessageDialog(null, "비밀번호가 맞지 않습니다.");
+		        		pwField.requestFocus();
+		        	}
+
 		        } else {
 		            JOptionPane.showMessageDialog(MainLogin.this, "계정 유형을 반드시 선택하세요.", "경고", JOptionPane.WARNING_MESSAGE);
 		        }
