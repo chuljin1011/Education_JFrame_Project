@@ -63,7 +63,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "update designer set pw=?,birth=?,name=?,gender=?,phone=?,rank=?,sal=?,hire_date=?,carrer=?,id=?, where id=?";
+			String sql = "update designer set pw=?,birth=?,name=?,gender=?,phone=?,rank=?,sal=?,hire_date=?,carrer=? where id=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, designer.getPw());
@@ -94,7 +94,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "delete from designer where = id=?";
+			String sql = "delete from designer where id=?";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, id);
@@ -200,7 +200,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,carrer from designer where order by name";
+			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,carrer from designer order by name";
 			pstmt = con.prepareStatement(sql);
 
 			rs=pstmt.executeQuery();

@@ -61,7 +61,7 @@ public class CustomerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "update customer set pw=?,birth=?,name=?,gender=?,phone=?,join_date=?,used_count=?,memo=?,id=?, where id=?";
+			String sql = "update customer set pw=?,birth=?,name=?,gender=?,phone=?,join_date=?,used_count=?,memo=? where id=?";
 			pstmt = con.prepareStatement(sql);				
 			pstmt.setString(1, customer.getPw());
 			pstmt.setString(2, customer.getBirth());
@@ -196,7 +196,7 @@ public class CustomerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select id,pw,birth,name,gender,phone,join_date,used_count,memo from customer where order by name";
+			String sql = "select id,pw,birth,name,gender,phone,join_date,used_count,memo from customer order by name";
 			pstmt = con.prepareStatement(sql);
 
 			rs=pstmt.executeQuery();
