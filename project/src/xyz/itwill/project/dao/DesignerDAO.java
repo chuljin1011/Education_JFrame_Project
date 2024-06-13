@@ -197,6 +197,7 @@ public class DesignerDAO extends JdbcDAO {
 		ResultSet rs = null;
 		List<DesignerDTO> designerList = new ArrayList<DesignerDTO>();
 		
+		
 		try {
 			con = getConnection();
 
