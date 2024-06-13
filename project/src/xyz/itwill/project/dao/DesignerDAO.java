@@ -23,7 +23,7 @@ public class DesignerDAO extends JdbcDAO {
 	}
 
 	// 디자이너 추가
-	public int insertStudent(DesignerDTO designer) {
+	public int insertDesigner(DesignerDTO designer) {
 		Connection con = null;
 		PreparedStatement pstmt = null;		
 		int rows = 0;
@@ -38,8 +38,8 @@ public class DesignerDAO extends JdbcDAO {
 			pstmt.setString(2, designer.getPw());
 			pstmt.setString(3, designer.getBirth());
 			pstmt.setString(4, designer.getName());
-			pstmt.setString(5, designer.getPhone());
-			pstmt.setString(6, designer.getGender());
+			pstmt.setString(5, designer.getGender());
+			pstmt.setString(6, designer.getPhone());
 			pstmt.setString(7, designer.getRank());
 			pstmt.setInt(8, designer.getSal());
 			pstmt.setString(9, designer.getHire_date());
@@ -55,7 +55,7 @@ public class DesignerDAO extends JdbcDAO {
 	}
 	
 	// 디자이너 수정
-	public int updateStudent(DesignerDTO designer) {
+	public int updateDesigner(DesignerDTO designer) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -86,7 +86,7 @@ public class DesignerDAO extends JdbcDAO {
 		return rows;
 	}
 	
-	public int deleteStudent(String id) {
+	public int deleteDesigner(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -108,7 +108,7 @@ public class DesignerDAO extends JdbcDAO {
 		return rows;
 	}
 	
-	public DesignerDTO selectStudentByID(String id) {
+	public DesignerDTO selectDesignerByID(String id) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -148,7 +148,7 @@ public class DesignerDAO extends JdbcDAO {
 		return designer;
 	}
 	
-	public List<DesignerDTO> selectStudentByName(String name) {
+	public List<DesignerDTO> selectDesignerByName(String name) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -190,7 +190,7 @@ public class DesignerDAO extends JdbcDAO {
 		return designerList;
 	}
 	
-	public List<DesignerDTO> selectStudentAll() {
+	public List<DesignerDTO> selectDesignerAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
