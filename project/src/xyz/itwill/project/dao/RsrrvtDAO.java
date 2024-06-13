@@ -107,11 +107,11 @@ public class RsrrvtDAO extends JdbcDAO {
 				rsrrvt = new RsrrvtDTO();
 
 				rsrrvt.setRno(rs.getInt("rno"));
-				rsrrvt.setRdate(rs.getString("rdate").substring(0, 11));
+				rsrrvt.setRdate(rs.getString("rdate").substring(0, 10));
 				rsrrvt.setRtime(rs.getInt("rtime"));
-				rsrrvt.setRdid(rs.getString("rdid"));
-				rsrrvt.setRcid(rs.getString("rcid"));
-				rsrrvt.setMenu_no(rs.getString("menu_no"));
+				rsrrvt.setDname(rs.getString("dname"));
+				rsrrvt.setCname(rs.getString("cname"));
+				rsrrvt.setMvalue(rs.getString("mvalue"));
 				rsrrvt.setPayment(rs.getInt("payment"));
 				rsrrvt.setCash(rs.getString("cash"));
 				rsrrvt.setStatus(rs.getString("status"));
@@ -149,11 +149,11 @@ public class RsrrvtDAO extends JdbcDAO {
 				RsrrvtDTO rsrrvt = new RsrrvtDTO();
 
 				rsrrvt.setRno(rs.getInt("rno"));
-				rsrrvt.setRdate(rs.getString("rdate").substring(0, 11));
+				rsrrvt.setRdate(rs.getString("rdate"));
 				rsrrvt.setRtime(rs.getInt("rtime"));
-				rsrrvt.setRdid(rs.getString("rdid"));
-				rsrrvt.setRcid(rs.getString("rcid"));
-				rsrrvt.setMenu_no(rs.getString("menu_no"));
+				rsrrvt.setDname(rs.getString("dname"));
+				rsrrvt.setCname(rs.getString("cname"));
+				rsrrvt.setMvalue(rs.getString("mvalue"));
 				rsrrvt.setPayment(rs.getInt("payment"));
 				rsrrvt.setCash(rs.getString("cash"));
 				rsrrvt.setStatus(rs.getString("status"));
@@ -189,11 +189,11 @@ public class RsrrvtDAO extends JdbcDAO {
 				RsrrvtDTO rsrrvt = new RsrrvtDTO();
 
 				rsrrvt.setRno(rs.getInt("rno"));
-				rsrrvt.setRdate(rs.getString("rdate").substring(0, 11));
+				rsrrvt.setRdate(rs.getString("rdate").substring(0, 10));
 				rsrrvt.setRtime(rs.getInt("rtime"));
-				rsrrvt.setRdid(rs.getString("rdid"));
-				rsrrvt.setRcid(rs.getString("rcid"));
-				rsrrvt.setMenu_no(rs.getString("menu_no"));
+				rsrrvt.setDname(rs.getString("dname"));
+				rsrrvt.setCname(rs.getString("cname"));
+				rsrrvt.setMvalue(rs.getString("mvalue"));
 				rsrrvt.setPayment(rs.getInt("payment"));
 				rsrrvt.setCash(rs.getString("cash"));
 				rsrrvt.setStatus(rs.getString("status"));
@@ -209,5 +209,6 @@ public class RsrrvtDAO extends JdbcDAO {
 		}
 		return rsrrvtList;
 	}
+
 
 }
