@@ -126,7 +126,7 @@ public class DesignerDAO extends JdbcDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
-				designer = new DesignerDTO(); // 필요없는지 확인
+				designer = new DesignerDTO();
 				
 				designer.setId(rs.getString("id"));
 				designer.setPw(rs.getString("pw"));

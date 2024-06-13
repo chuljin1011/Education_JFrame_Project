@@ -1,8 +1,8 @@
 package xyz.itwill.project.dao;
 
 public class RsrrvtDTO {
-	// 예약 테이블 칼럼
-	private int rno;
+	// 예약 테이블 칼럼 _ 10개
+	private int rno;             // RSRRVT_MENU.NEXTVA
 	private String rdate;
 	private int rtime;
 	private String rdid;
@@ -29,7 +29,7 @@ public class RsrrvtDTO {
 
 
 	public RsrrvtDTO(int rno, String rdate, int rtime, String rdid, String rcid, String menu_no, int payment,
-			String cash, String status, String memo, String dname, String cname, String mvalue) {
+			String cash, String status, String dname, String cname, String mvalue, String memo) {
 		super();
 		this.rno = rno;
 		this.rdate = rdate;
@@ -40,10 +40,10 @@ public class RsrrvtDTO {
 		this.payment = payment;
 		this.cash = cash;
 		this.status = status;
-		this.memo = memo;
 		this.dname = dname;
 		this.cname = cname;
 		this.mvalue = mvalue;
+		this.memo = memo;
 	}
 
 
