@@ -6,28 +6,28 @@ public class DesignerDTO {
    private String birth;
    private String name;
    private String gender;
+   private String phone;
    private String rank;
    private int sal;
    private String hire_date;
-   private String phone;
    private int career;
    
    public DesignerDTO() {
       // TODO Auto-generated constructor stub
    }
 
-   public DesignerDTO(String id, String pw, String birth, String name, String gender, String rank, int sal,
-         String hire_date, String phone, int career) {
+   public DesignerDTO(String id, String pw, String birth, String name, String gender, String phone, String rank, int sal,
+         String hire_date, int career) {
       super();
       this.id = id;
       this.pw = pw;
       this.birth = birth;
       this.name = name;
       this.gender = gender;
+      this.phone = phone;
       this.rank = rank;
       this.sal = sal;
       this.hire_date = hire_date;
-      this.phone = phone;
       this.career = career;
    }
 
