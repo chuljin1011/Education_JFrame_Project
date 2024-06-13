@@ -38,11 +38,11 @@ public class DesignerDAO extends JdbcDAO {
 			pstmt.setString(2, designer.getPw());
 			pstmt.setString(3, designer.getBirth());
 			pstmt.setString(4, designer.getName());
-			pstmt.setString(5, designer.getGender());
-			pstmt.setString(6, designer.getRank());
-			pstmt.setInt(7, designer.getSal());
-			pstmt.setString(8, designer.getHire_date());
-			pstmt.setString(9, designer.getPhone());
+			pstmt.setString(5, designer.getPhone());
+			pstmt.setString(6, designer.getGender());
+			pstmt.setString(7, designer.getRank());
+			pstmt.setInt(8, designer.getSal());
+			pstmt.setString(9, designer.getHire_date());
 			pstmt.setInt(10, designer.getCareer());
 
 			rows = pstmt.executeUpdate();
@@ -70,10 +70,10 @@ public class DesignerDAO extends JdbcDAO {
 			pstmt.setString(2, designer.getBirth());
 			pstmt.setString(3, designer.getName());
 			pstmt.setString(4, designer.getGender());
-			pstmt.setString(5, designer.getRank());
-			pstmt.setInt(6, designer.getSal());
-			pstmt.setString(7, designer.getHire_date());
-			pstmt.setString(8, designer.getPhone());
+			pstmt.setString(5, designer.getPhone());
+			pstmt.setString(6, designer.getRank());
+			pstmt.setInt(7, designer.getSal());
+			pstmt.setString(8, designer.getHire_date());
 			pstmt.setInt(9, designer.getCareer());
 			pstmt.setString(10, designer.getId());
 
@@ -133,10 +133,10 @@ public class DesignerDAO extends JdbcDAO {
 				designer.setBirth(rs.getString("birth"));
 				designer.setName(rs.getString("name"));
 				designer.setGender(rs.getString("gender"));
+				designer.setPhone(rs.getString("phone"));
 				designer.setRank(rs.getString("rank"));
 				designer.setSal(rs.getInt("sal"));
 				designer.setHire_date(rs.getString("hire_date"));
-				designer.setPhone(rs.getString("phone"));
 				designer.setCareer(rs.getInt("career"));
 			}
 
@@ -158,7 +158,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select id,pw,birth,name,gender,rank,sal,hire_date,phone,carrer from designer where name = ? order by name";
+			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,carrer from designer where name like '%'||?||'%' order by name";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, name);
@@ -173,10 +173,10 @@ public class DesignerDAO extends JdbcDAO {
 				designer.setBirth(rs.getString("birth"));
 				designer.setName(rs.getString("name"));
 				designer.setGender(rs.getString("gender"));
+				designer.setPhone(rs.getString("phone"));
 				designer.setRank(rs.getString("rank"));
 				designer.setSal(rs.getInt("sal"));
 				designer.setHire_date(rs.getString("hire_date"));
-				designer.setPhone(rs.getString("phone"));
 				designer.setCareer(rs.getInt("career"));
 				
 				designerList.add(designer);
@@ -200,7 +200,7 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select id,pw,birth,name,gender,rank,sal,hire_date,phone,carrer from designer where order by name";
+			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,carrer from designer where order by name";
 			pstmt = con.prepareStatement(sql);
 
 			rs=pstmt.executeQuery();
@@ -213,10 +213,10 @@ public class DesignerDAO extends JdbcDAO {
 				designer.setBirth(rs.getString("birth"));
 				designer.setName(rs.getString("name"));
 				designer.setGender(rs.getString("gender"));
+				designer.setPhone(rs.getString("phone"));
 				designer.setRank(rs.getString("rank"));
 				designer.setSal(rs.getInt("sal"));
 				designer.setHire_date(rs.getString("hire_date"));
-				designer.setPhone(rs.getString("phone"));
 				designer.setCareer(rs.getInt("career"));
 				
 				designerList.add(designer);
