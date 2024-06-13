@@ -120,7 +120,7 @@ public class RsrrvtDAO extends JdbcDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("[에러]selectRsrrvtAll() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]selectRsrrvtbyRno() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt, rs);
 		}
@@ -163,7 +163,7 @@ public class RsrrvtDAO extends JdbcDAO {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("[에러]selectRsrrvtAll() 메소드의 SQL 오류 = " + e.getMessage());
+			System.out.println("[에러]selectRsrrvtbyRdate() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {
 			close(con, pstmt, rs);
 		}
