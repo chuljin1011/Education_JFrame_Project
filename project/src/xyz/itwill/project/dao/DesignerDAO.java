@@ -148,6 +148,39 @@ public class DesignerDAO extends JdbcDAO {
 		return designer;
 	}
 	
+	public DesignerDTO selectDesignerByNameRank(String name, String rank) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		DesignerDTO designer = null;
+		
+		try {
+			con = getConnection();
+
+			String sql = "select id,pw,birth,name,gender,phone,rank,sal,hire_date,career from designer where name = ? and rank = ?";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, rank);
+
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				designer = new DesignerDTO(); 
+				
+				designer.setId(rs.getString("id"));
+		
+			}
+
+		} catch (SQLException e) {
+			System.out.println("[에러]selectDesignerByID() 메소드의 SQL 오류 = " + e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return designer;
+	}
+	
 	public List<DesignerDTO> selectDesignerByName(String name) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

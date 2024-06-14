@@ -6,11 +6,11 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -32,7 +32,6 @@ import xyz.itwill.project.dao.MenuDAO;
 import xyz.itwill.project.dao.MenuDTO;
 import xyz.itwill.project.dao.RsrrvtDAO;
 import xyz.itwill.project.dao.RsrrvtDTO;
-import javax.swing.JCheckBox;
 
 public class MemberLogin2 extends JFrame {
 
@@ -57,17 +56,23 @@ public class MemberLogin2 extends JFrame {
 	private JComboBox mcomboBox;
 	private JComboBox dcomboBox;
 	private boolean getDate_Status;
+	
 	private String final_Rdate;		
 	private int final_Rtime;
 	private String final_Rdid;  
+	private String final_Rdname;  
 //	private String final_Rcid;		login_id로 대체
 	private int final_Menu_No;
 	private String final_Memo;
 	private int final_Payment;
 	private String final_Cash;
 	private String final_Status;
+	
+	private String get_Rank;
+	
 	private JTextField select_Memo;
 	private JCheckBox cashCheckBox;
+	private JButton btnNewButton;
 	
 	
 	
@@ -157,7 +162,9 @@ public class MemberLogin2 extends JFrame {
 
 							
 						}
-
+						
+						btnNewButton.setEnabled(true); // 예약하기 버튼 활성화
+						
 					} 
 
 				}
@@ -292,10 +299,12 @@ public class MemberLogin2 extends JFrame {
 					if (selectedRow != -1) {
 
 						String name = (String) (dTable.getValueAt(selectedRow, 0));
+						String rank = (String) (dTable.getValueAt(selectedRow, 1));
 
 						select_dName.setText(name);
 						
-						final_Rdid = name;
+						final_Rdname = name;
+						get_Rank = rank;
 
 					}
 				}
@@ -346,65 +355,19 @@ public class MemberLogin2 extends JFrame {
 		lblNewLabel_2_1_1.setBounds(345, 13, 50, 17);
 		panel_1.add(lblNewLabel_2_1_1);
 
-		JButton btnNewButton_1 = new JButton("예약하기");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnNewButton = new JButton("예약하기");
+		btnNewButton.setEnabled(false);
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (select_dName.getText().isBlank()) {
-					JOptionPane.showMessageDialog(null, "디자이너를 선택해 주세요");
-					select_dName.requestFocus();
-					return;
-				}
-				if (select_mValue.getText().isBlank()) {
-					JOptionPane.showMessageDialog(null, "시술 받으실 메뉴를 선택해 주세요");
-					select_mValue.requestFocus();
-					return;
-				}
-				if (select_Date.getText().isBlank()) {
-					JOptionPane.showMessageDialog(null, "예약 날짜 및 시간을 선택해주세요.");
-					return;
-				}
-				
-				final_Memo = select_Memo.getText();
-				final_Status = "1";
-				
-				if (cashCheckBox.isSelected()) {
-					final_Cash = "2";
-				} else {
-					final_Cash = "1";
-					
-				}
-					
-				
-				
-				System.out.println("final_Rdate = " + final_Rdate);
-				System.out.println("final_Rtime = " + final_Rtime);
-				System.out.println("final_Rdid = " + final_Rdid);
-				System.out.println("login_id = " + login_id);
-				System.out.println("final_Menu_No = " + final_Menu_No);
-				System.out.println("final_Memo = " + final_Memo);
-				System.out.println("final_Payment = " + final_Payment);
-				System.out.println("final_Cash = " + final_Cash);
-				System.out.println("final_Status = " + final_Status);
-
-//				private String final_Rdate;			
-//				private int final_Rtime;
-//				private String final_Rdid;			완료
-//				private String final_Rcid;			- login_id 로 대체
-//				private int final_Menu_No;			완료
-//				private String final_Memo;			- select_Memo.getText
-//				private int final_Payment;			완료
-//				private String final_Cash;			cashCheckBox check = 2(현금)
-//				private String final_Status;		char '1' (예약중)	
-				
-				
+				addRsrrvt();
 
 				
 				
 			}
 		});
-		btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 14));
-		btnNewButton_1.setBounds(524, 5, 97, 31);
-		panel_1.add(btnNewButton_1);
+		btnNewButton.setFont(new Font("굴림", Font.BOLD, 14));
+		btnNewButton.setBounds(524, 5, 97, 31);
+		panel_1.add(btnNewButton);
 
 		JScrollPane rscrollPane = new JScrollPane();
 		rscrollPane.setBounds(22, 32, 630, 70);
@@ -416,7 +379,7 @@ public class MemberLogin2 extends JFrame {
 		rTable.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "예약번호", "예약날짜", "예약시간", "디자이너", "시술명", "결제금액", "결제수단", "예약상태", "메모" }));
 		rTable.getTableHeader().setReorderingAllowed(false);
-		rTable.getTableHeader().setResizingAllowed(false);
+//		rTable.getTableHeader().setResizingAllowed(false);
 
 		// 예약 테이블 불러오기
 		displayAllRsrrvt();
@@ -471,6 +434,8 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) dTable.getModel();
+		
+		defaultTableModel.setNumRows(0);
 
 		for (DesignerDTO designer : designerList) {
 			Vector<Object> rowData = new Vector<Object>();
@@ -493,6 +458,8 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) mTable.getModel();
+		
+		defaultTableModel.setNumRows(0);
 
 		for (MenuDTO menu : menuList) {
 			Vector<Object> rowData = new Vector<Object>();
@@ -516,6 +483,8 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) rTable.getModel();
+		
+		defaultTableModel.setNumRows(0);
 
 		for (RsrrvtDTO rsrrvt : rsrrvtList) {
 			Vector<Object> rowData = new Vector<Object>();
@@ -570,7 +539,77 @@ public class MemberLogin2 extends JFrame {
 
 
 		}
-		
-
 	}
+	
+	public void DesignerchangeNameToId() {
+		DesignerDTO designer=DesignerDAO.getDAO().selectDesignerByNameRank(final_Rdname, get_Rank);
+		
+		final_Rdid = designer.getId();		
+		System.out.println(designer.getId());
+		
+	}
+	
+	
+	
+	public void addRsrrvt() {
+		DesignerchangeNameToId();
+
+		
+		if (select_dName.getText().isBlank()) {
+			JOptionPane.showMessageDialog(null, "디자이너를 선택해 주세요");
+			select_dName.requestFocus();
+			return;
+		}
+		if (select_mValue.getText().isBlank()) {
+			JOptionPane.showMessageDialog(null, "시술 받으실 메뉴를 선택해 주세요");
+			select_mValue.requestFocus();
+			return;
+		}
+		if (select_Date.getText().isBlank()) {
+			JOptionPane.showMessageDialog(null, "예약 날짜 및 시간을 선택해주세요.");
+			return;
+		}
+		
+		final_Memo = select_Memo.getText();
+		final_Status = "1";
+		
+		
+		if (cashCheckBox.isSelected()) {
+			final_Cash = "2";
+		} else {
+			final_Cash = "1";
+			
+
+		}
+		
+		RsrrvtDTO rsrrvt = new RsrrvtDTO();
+		
+		rsrrvt.setRdate(final_Rdate);
+		rsrrvt.setRtime(final_Rtime);
+		rsrrvt.setRdid(final_Rdid);
+		rsrrvt.setRcid(login_id);
+		rsrrvt.setMenu_no(final_Menu_No);
+		rsrrvt.setPayment(final_Payment);
+		rsrrvt.setCash(final_Cash);
+		rsrrvt.setStatus(final_Status);
+		rsrrvt.setMemo(final_Memo);
+		
+		int rows = RsrrvtDAO.get_dao().insertRsrrvt(rsrrvt);
+		
+		if (rows > 0) {
+		JOptionPane.showMessageDialog(this, "예약이 완료 되었습니다.");
+		displayAllRsrrvt();
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "잘못된 접근으로 예약이 진행되지 못했습니다..");
+		}
+		
+		
+	}
+	
 }
+
+
+
+
+

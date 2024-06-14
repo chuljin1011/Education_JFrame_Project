@@ -31,18 +31,18 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "insert into rsrrvt values(RSRRVT_MENU.NEXTVA,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into rsrrvt values(RSRRVT_MENU.NEXTVAL,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, rsrrvt.getRdate());
 			pstmt.setInt(2, rsrrvt.getRtime());
 			pstmt.setString(3, rsrrvt.getRdid());
 			pstmt.setString(4, rsrrvt.getRcid());
-			pstmt.setString(5, rsrrvt.getMenu_no());
-			pstmt.setInt(6, rsrrvt.getPayment());
-			pstmt.setString(7, rsrrvt.getCash());
-			pstmt.setString(8, rsrrvt.getStatus());
-			pstmt.setString(9, rsrrvt.getMemo());
+			pstmt.setInt(5, rsrrvt.getMenu_no());
+			pstmt.setString(6, rsrrvt.getMemo());
+			pstmt.setInt(7, rsrrvt.getPayment());
+			pstmt.setString(8, rsrrvt.getCash());
+			pstmt.setString(9, rsrrvt.getStatus());
 
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -70,7 +70,7 @@ public class RsrrvtDAO extends JdbcDAO {
 			pstmt.setInt(2, rsrrvt.getRtime());
 			pstmt.setString(3, rsrrvt.getRdid());
 			pstmt.setString(4, rsrrvt.getRcid());
-			pstmt.setString(5, rsrrvt.getMenu_no());
+			pstmt.setInt(5, rsrrvt.getMenu_no());
 			pstmt.setInt(6, rsrrvt.getPayment());
 			pstmt.setString(7, rsrrvt.getCash());
 			pstmt.setString(8, rsrrvt.getStatus());

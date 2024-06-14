@@ -7,7 +7,7 @@ public class RsrrvtDTO {
 	private int rtime;
 	private String rdid;
 	private String rcid;
-	private String menu_no;
+	private int menu_no;
 	private int payment;
 	private String cash;
 	private String status;
@@ -28,7 +28,7 @@ public class RsrrvtDTO {
 	}
 
 
-	public RsrrvtDTO(int rno, String rdate, int rtime, String rdid, String rcid, String menu_no, int payment,
+	public RsrrvtDTO(int rno, String rdate, int rtime, String rdid, String rcid, int menu_no, int payment,
 			String cash, String status, String dname, String cname, String mvalue, String memo) {
 		super();
 		this.rno = rno;
@@ -40,10 +40,10 @@ public class RsrrvtDTO {
 		this.payment = payment;
 		this.cash = cash;
 		this.status = status;
+		this.memo = memo;
 		this.dname = dname;
 		this.cname = cname;
 		this.mvalue = mvalue;
-		this.memo = memo;
 	}
 
 
@@ -97,12 +97,12 @@ public class RsrrvtDTO {
 	}
 
 
-	public String getMenu_no() {
+	public int getMenu_no() {
 		return menu_no;
 	}
 
 
-	public void setMenu_no(String menu_no) {
+	public void setMenu_no(int menu_no) {
 		this.menu_no = menu_no;
 	}
 
