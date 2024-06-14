@@ -7,44 +7,51 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import xyz.itwill.project.dao.DesignerDAO;
+import xyz.itwill.project.dao.DesignerDTO;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
 
 public class DesignerInsert extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField hire_dateTF;
+	private JTextField salTF;
+	private JTextField phoneTF;
+	private JTextField nameTF;
+	private JTextField birthTF;
+	private JTextField idTF;
+	private JTextField pwTF;
+	private JTextField careerTF;
+	private JTextField genderTF;   
+    private JTextField rankTF;
+      
+
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			DesignerInsert dialog = new DesignerInsert();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			DesignerInsert dialog = new DesignerInsert();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public DesignerInsert() {
+	public DesignerInsert(AdministratorLogin administratorLogin) {
 		setTitle("디자이너 등록");
 		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -66,15 +73,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
 		{
-			textField_5 = new JTextField();
-			GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-			gbc_textField_5.gridwidth = 2;
-			gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_5.gridx = 2;
-			gbc_textField_5.gridy = 1;
-			contentPanel.add(textField_5, gbc_textField_5);
-			textField_5.setColumns(10);
+			idTF = new JTextField();
+			GridBagConstraints gbc_idTF = new GridBagConstraints();
+			gbc_idTF.gridwidth = 2;
+			gbc_idTF.insets = new Insets(0, 0, 5, 5);
+			gbc_idTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_idTF.gridx = 2;
+			gbc_idTF.gridy = 1;
+			contentPanel.add(idTF, gbc_idTF);
+			idTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("비밀번호");
@@ -86,15 +93,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		}
 		{
-			textField_6 = new JTextField();
-			GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-			gbc_textField_6.gridwidth = 2;
-			gbc_textField_6.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_6.gridx = 2;
-			gbc_textField_6.gridy = 2;
-			contentPanel.add(textField_6, gbc_textField_6);
-			textField_6.setColumns(10);
+			pwTF = new JTextField();
+			GridBagConstraints gbc_pwTF = new GridBagConstraints();
+			gbc_pwTF.gridwidth = 2;
+			gbc_pwTF.insets = new Insets(0, 0, 5, 5);
+			gbc_pwTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_pwTF.gridx = 2;
+			gbc_pwTF.gridy = 2;
+			contentPanel.add(pwTF, gbc_pwTF);
+			pwTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("생년월일");
@@ -106,15 +113,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		}
 		{
-			textField_4 = new JTextField();
-			GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-			gbc_textField_4.gridwidth = 2;
-			gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_4.gridx = 2;
-			gbc_textField_4.gridy = 3;
-			contentPanel.add(textField_4, gbc_textField_4);
-			textField_4.setColumns(10);
+			birthTF = new JTextField();
+			GridBagConstraints gbc_birthTF = new GridBagConstraints();
+			gbc_birthTF.gridwidth = 2;
+			gbc_birthTF.insets = new Insets(0, 0, 5, 5);
+			gbc_birthTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_birthTF.gridx = 2;
+			gbc_birthTF.gridy = 3;
+			contentPanel.add(birthTF, gbc_birthTF);
+			birthTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("이름");
@@ -126,15 +133,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			textField_3 = new JTextField();
-			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-			gbc_textField_3.gridwidth = 2;
-			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_3.gridx = 2;
-			gbc_textField_3.gridy = 4;
-			contentPanel.add(textField_3, gbc_textField_3);
-			textField_3.setColumns(10);
+			nameTF = new JTextField();
+			GridBagConstraints gbc_nameTF = new GridBagConstraints();
+			gbc_nameTF.gridwidth = 2;
+			gbc_nameTF.insets = new Insets(0, 0, 5, 5);
+			gbc_nameTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_nameTF.gridx = 2;
+			gbc_nameTF.gridy = 4;
+			contentPanel.add(nameTF, gbc_nameTF);
+			nameTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("성별");
@@ -144,33 +151,17 @@ public class DesignerInsert extends JDialog {
 			gbc_lblNewLabel_4.gridx = 1;
 			gbc_lblNewLabel_4.gridy = 5;
 			contentPanel.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		}
+		}		
 		{
-			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("남자");
-			GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
-			gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox_1.gridx = 2;
-			gbc_chckbxNewCheckBox_1.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
-		
-			JCheckBox chckbxNewCheckBox = new JCheckBox("여자");
-			GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
-			gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox.gridx = 3;
-			gbc_chckbxNewCheckBox.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
-			
-			chckbxNewCheckBox.addActionListener(e -> {
-				if(chckbxNewCheckBox.isSelected()) {
-	            chckbxNewCheckBox_1.setSelected(false);
-				}
-			});
-	    
-			chckbxNewCheckBox_1.addActionListener(e -> {
-				if(chckbxNewCheckBox_1.isSelected()) {
-					chckbxNewCheckBox.setSelected(false);
-				}
-			});
+			genderTF = new JTextField();
+			GridBagConstraints gbc_genderTF = new GridBagConstraints();
+			gbc_genderTF.gridwidth = 2;
+			gbc_genderTF.insets = new Insets(0, 0, 5, 5);
+			gbc_genderTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_genderTF.gridx = 2;
+			gbc_genderTF.gridy = 5;
+			contentPanel.add(genderTF, gbc_genderTF);
+			genderTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_8 = new JLabel("핸드폰 번호");
@@ -182,15 +173,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_8, gbc_lblNewLabel_8);
 		}
 		{
-			textField_2 = new JTextField();
-			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-			gbc_textField_2.gridwidth = 2;
-			gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_2.gridx = 2;
-			gbc_textField_2.gridy = 6;
-			contentPanel.add(textField_2, gbc_textField_2);
-			textField_2.setColumns(10);
+			phoneTF = new JTextField();
+			GridBagConstraints gbc_phoneTF = new GridBagConstraints();
+			gbc_phoneTF.gridwidth = 2;
+			gbc_phoneTF.insets = new Insets(0, 0, 5, 5);
+			gbc_phoneTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_phoneTF.gridx = 2;
+			gbc_phoneTF.gridy = 6;
+			contentPanel.add(phoneTF, gbc_phoneTF);
+			phoneTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_5 = new JLabel("직급");
@@ -200,20 +191,17 @@ public class DesignerInsert extends JDialog {
 			gbc_lblNewLabel_5.gridx = 1;
 			gbc_lblNewLabel_5.gridy = 7;
 			contentPanel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-		}
+		}		
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.gridwidth = 2;
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 7;
-			contentPanel.add(comboBox, gbc_comboBox);
-			String[] items = {"","원장","디자이너"};
-			for (String item : items) {
-			    comboBox.addItem(item);
-			}			
+			rankTF = new JTextField();
+			GridBagConstraints gbc_rankTF = new GridBagConstraints();
+			gbc_rankTF.gridwidth = 2;
+			gbc_rankTF.insets = new Insets(0, 0, 5, 5);
+			gbc_rankTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_rankTF.gridx = 2;
+			gbc_rankTF.gridy = 7;
+			contentPanel.add(rankTF, gbc_rankTF);
+			rankTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_6 = new JLabel("급여");
@@ -225,15 +213,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_6, gbc_lblNewLabel_6);
 		}
 		{
-			textField_1 = new JTextField();
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.gridwidth = 2;
-			gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.gridx = 2;
-			gbc_textField_1.gridy = 8;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setColumns(10);
+			salTF = new JTextField();
+			GridBagConstraints gbc_salTF = new GridBagConstraints();
+			gbc_salTF.gridwidth = 2;
+			gbc_salTF.insets = new Insets(0, 0, 5, 5);
+			gbc_salTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_salTF.gridx = 2;
+			gbc_salTF.gridy = 8;
+			contentPanel.add(salTF, gbc_salTF);
+			salTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_7 = new JLabel("고용일");
@@ -245,15 +233,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_7, gbc_lblNewLabel_7);
 		}
 		{
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.gridwidth = 2;
-			gbc_textField.insets = new Insets(0, 0, 5, 5);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 2;
-			gbc_textField.gridy = 9;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
+			hire_dateTF = new JTextField();
+			GridBagConstraints gbc_hire_dateTF = new GridBagConstraints();
+			gbc_hire_dateTF.gridwidth = 2;
+			gbc_hire_dateTF.insets = new Insets(0, 0, 5, 5);
+			gbc_hire_dateTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_hire_dateTF.gridx = 2;
+			gbc_hire_dateTF.gridy = 9;
+			contentPanel.add(hire_dateTF, gbc_hire_dateTF);
+			hire_dateTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_9 = new JLabel("경력");
@@ -265,15 +253,15 @@ public class DesignerInsert extends JDialog {
 			contentPanel.add(lblNewLabel_9, gbc_lblNewLabel_9);
 		}
 		{
-			textField_7 = new JTextField();
-			GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-			gbc_textField_7.gridwidth = 2;
-			gbc_textField_7.insets = new Insets(0, 0, 0, 5);
-			gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_7.gridx = 2;
-			gbc_textField_7.gridy = 10;
-			contentPanel.add(textField_7, gbc_textField_7);
-			textField_7.setColumns(10);
+			careerTF = new JTextField();
+			GridBagConstraints gbc_careerTF = new GridBagConstraints();
+			gbc_careerTF.gridwidth = 2;
+			gbc_careerTF.insets = new Insets(0, 0, 0, 5);
+			gbc_careerTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_careerTF.gridx = 2;
+			gbc_careerTF.gridy = 10;
+			contentPanel.add(careerTF, gbc_careerTF);
+			careerTF.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -295,8 +283,9 @@ public class DesignerInsert extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 				
 				okButton.addActionListener(e -> {
-				    
-				    dispose();
+					addDesigner();
+				    administratorLogin.displayAllDesigner();
+//				    dispose();
 				});
 			}
 			{
@@ -313,6 +302,106 @@ public class DesignerInsert extends JDialog {
 				});
 			}
 		}
+	}
+	
+	public void addDesigner() {	
+		String id=idTF.getText();
+		
+		if(id.equals("")) {
+			JOptionPane.showMessageDialog(this, "아이디를 입력해 주세요.");
+			idTF.requestFocus();
+			return;
+		}
+		String pw=pwTF.getText();
+		
+		if(pw.equals("")) {
+			JOptionPane.showMessageDialog(this, "비밀번호를 입력해 주세요.");
+			pwTF.requestFocus();
+			return;
+		}
+		String birth=birthTF.getText();
+		
+		if(birth.equals("")) {
+			JOptionPane.showMessageDialog(this, "생년월일을 입력해 주세요.");
+			birthTF.requestFocus();
+			return;
+		}
+		String name=nameTF.getText();
+		
+		if(name.equals("")) {
+			JOptionPane.showMessageDialog(this, "이름을 입력해 주세요.");
+			nameTF.requestFocus();
+			return;
+		}		
+		String gender=genderTF.getText();
+		
+		if(gender.equals("")) {
+			JOptionPane.showMessageDialog(this, "성별을 입력해 주세요.");
+			genderTF.requestFocus();
+			return;
+		}		
+		
+		String phone=phoneTF.getText();
+		
+		if(phone.equals("")) {
+			JOptionPane.showMessageDialog(this, "핸드폰 번호를 입력해 주세요.");
+			phoneTF.requestFocus();
+			return;
+		}
+		String rank=rankTF.getText();
+		
+		if(rank.equals("")) {
+			JOptionPane.showMessageDialog(this, "직급을 입력해 주세요.");
+			rankTF.requestFocus();
+			return;
+		}
+		String salString=salTF.getText();
+		
+		if(salString.equals("")) {
+			JOptionPane.showMessageDialog(this, "급여를 입력해 주세요.");
+			salTF.requestFocus();
+			return;
+		}
+		int sal=Integer.parseInt(salString);
+		
+		String hire_date=hire_dateTF.getText();
+		
+		if(hire_date.equals("")) {
+			JOptionPane.showMessageDialog(this, "고용일을 입력해 주세요.");
+			hire_dateTF.requestFocus();
+			return;
+		}
+		String careerString=careerTF.getText();
+		
+		if(careerString.equals("")) {
+			JOptionPane.showMessageDialog(this, "경력을 입력해 주세요.");
+			careerTF.requestFocus();
+			return;
+		}
+		int career=Integer.parseInt(careerString);
+		
+		DesignerDTO designer=new DesignerDTO();		
+		designer.setId(id);
+		designer.setPw(pw);
+		designer.setBirth(birth);
+		designer.setName(name);
+		designer.setGender(gender);
+		designer.setPhone(phone);
+		designer.setRank(rank);
+		designer.setSal(sal);
+		designer.setHire_date(hire_date);
+		designer.setCareer(career);
+		
+		int rows=DesignerDAO.getDAO().insertDesigner(designer);
+		
+		if (rows > 0) {
+		JOptionPane.showMessageDialog(this, rows+"명의 디자이너를 삽입하여 저장 하였습니다.");
+		dispose();
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
+		
 	}
 
 }
