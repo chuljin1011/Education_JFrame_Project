@@ -210,6 +210,10 @@ public class DesignerUpdate extends JDialog {
 			gbc_comboBox.gridx = 2;
 			gbc_comboBox.gridy = 7;
 			contentPanel.add(comboBox, gbc_comboBox);
+			String[] items = {"","원장","디자이너"};
+			for (String item : items) {
+			    comboBox.addItem(item);
+			}
 		}
 		{
 			JLabel lblNewLabel_6 = new JLabel("급여");

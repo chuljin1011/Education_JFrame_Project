@@ -60,7 +60,11 @@ public class MenuSelect extends JDialog {
 			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBox.gridx = 1;
 			gbc_comboBox.gridy = 2;
-			contentPanel.add(comboBox, gbc_comboBox);						
+			contentPanel.add(comboBox, gbc_comboBox);	
+			String[] items = {"","남성-커트","여성-커트", "남성-파마", "여성-파마"};
+			for (String item : items) {
+			    comboBox.addItem(item);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();

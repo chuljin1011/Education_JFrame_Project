@@ -61,6 +61,10 @@ public class DesignerSelect extends JDialog {
 			gbc_comboBox.gridx = 1;
 			gbc_comboBox.gridy = 2;
 			contentPanel.add(comboBox, gbc_comboBox);
+			String[] items = {"","홍길동","김갑돌"};
+			for (String item : items) {
+			    comboBox.addItem(item);
+			}
 		}
 		{
 			JPanel buttonPane = new JPanel();
