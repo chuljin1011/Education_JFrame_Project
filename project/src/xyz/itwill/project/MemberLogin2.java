@@ -526,7 +526,7 @@ public class MemberLogin2 extends JFrame {
 
 
 		
-		for (RsrrvtDTO rsrrvt : rsrrvtList) {
+		for (RsrrvtDTO rsrrvt : rsrrvtList) { 
 
 			chk = (rsrrvt.getRtime())-buttonTimeMin;
 			
