@@ -37,7 +37,8 @@ public class AdministratorLogin extends JFrame {
 	private JTable table_2;
 	private JTable table_3;
 	MenuInsert menuInsertdialog;
-
+	DesignerInsert designerInsertdialog;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +67,7 @@ public class AdministratorLogin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		menuInsertdialog = new MenuInsert(this);
+		designerInsertdialog = new DesignerInsert(this);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -144,7 +146,7 @@ public class AdministratorLogin extends JFrame {
 					menuInsertdialog.setVisible(true);					
 					break;
 				case 1 :
-					DesignerInsert designerInsertdialog = new DesignerInsert();
+//					DesignerInsert designerInsertdialog = new DesignerInsert();
 					designerInsertdialog.setVisible(true);
 					break;
 				case 2 :
@@ -281,6 +283,8 @@ public class AdministratorLogin extends JFrame {
 		}
 		
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table.getModel();
+		
+		defaultTableModel.setNumRows(0);
 				
 		for(DesignerDTO designer : DesignerList) {
 			
