@@ -72,7 +72,7 @@ public class AdministratorLogin extends JFrame {
 	
 	 
 	
-	
+	 
 	
 	/**
 	 * Launch the application.
