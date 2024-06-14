@@ -6,28 +6,33 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import xyz.itwill.project.dao.RsrrvtDAO;
+import xyz.itwill.project.dao.RsrrvtDTO;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
+
 
 public class ReservationInsert extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField_1;
-	private JTextField textField_4;
-	private JTextField textField_9;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_5;
+	private JTextField rdateTF;
+	private JTextField cnameTF;
+	private JTextField memoTF;
+	private JTextField rtimeTF;
+	private JTextField dnameTF;
+	private JTextField mvalueTF;
+	private JTextField cashTF;
 
 	/**
 	 * Launch the application.
 	 */
+/*
 	public static void main(String[] args) {
 		try {
 			ReservationInsert dialog = new ReservationInsert();
@@ -37,11 +42,11 @@ public class ReservationInsert extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+*/
 	/**
 	 * Create the dialog.
 	 */
-	public ReservationInsert() {
+	public ReservationInsert(AdministratorLogin administratorLogin) {
 		setTitle("예약 등록");
 		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -63,14 +68,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		}
 		{
-			textField_1 = new JTextField();
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.gridx = 2;
-			gbc_textField_1.gridy = 2;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setColumns(10);
+			rdateTF = new JTextField();
+			GridBagConstraints gbc_rdateTF = new GridBagConstraints();
+			gbc_rdateTF.insets = new Insets(0, 0, 5, 5);
+			gbc_rdateTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_rdateTF.gridx = 2;
+			gbc_rdateTF.gridy = 2;
+			contentPanel.add(rdateTF, gbc_rdateTF);
+			rdateTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("예약 시간");
@@ -82,14 +87,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		}
 		{
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.insets = new Insets(0, 0, 5, 5);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 2;
-			gbc_textField.gridy = 3;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
+			rtimeTF = new JTextField();
+			GridBagConstraints gbc_rtimeTF = new GridBagConstraints();
+			gbc_rtimeTF.insets = new Insets(0, 0, 5, 5);
+			gbc_rtimeTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_rtimeTF.gridx = 2;
+			gbc_rtimeTF.gridy = 3;
+			contentPanel.add(rtimeTF, gbc_rtimeTF);
+			rtimeTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("예약 디자이너");
@@ -101,14 +106,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			textField_2 = new JTextField();
-			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-			gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_2.gridx = 2;
-			gbc_textField_2.gridy = 4;
-			contentPanel.add(textField_2, gbc_textField_2);
-			textField_2.setColumns(10);
+			dnameTF = new JTextField();
+			GridBagConstraints gbc_dnameTF = new GridBagConstraints();
+			gbc_dnameTF.insets = new Insets(0, 0, 5, 5);
+			gbc_dnameTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_dnameTF.gridx = 2;
+			gbc_dnameTF.gridy = 4;
+			contentPanel.add(dnameTF, gbc_dnameTF);
+			dnameTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("예약 회원");
@@ -120,14 +125,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		}
 		{
-			textField_4 = new JTextField();
-			GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-			gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_4.gridx = 2;
-			gbc_textField_4.gridy = 5;
-			contentPanel.add(textField_4, gbc_textField_4);
-			textField_4.setColumns(10);
+			cnameTF = new JTextField();
+			GridBagConstraints gbc_cnameTF = new GridBagConstraints();
+			gbc_cnameTF.insets = new Insets(0, 0, 5, 5);
+			gbc_cnameTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_cnameTF.gridx = 2;
+			gbc_cnameTF.gridy = 5;
+			contentPanel.add(cnameTF, gbc_cnameTF);
+			cnameTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_5 = new JLabel("예약 시술");
@@ -139,14 +144,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_5, gbc_lblNewLabel_5);
 		}
 		{
-			textField_3 = new JTextField();
-			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_3.gridx = 2;
-			gbc_textField_3.gridy = 6;
-			contentPanel.add(textField_3, gbc_textField_3);
-			textField_3.setColumns(10);
+			mvalueTF = new JTextField();
+			GridBagConstraints gbc_mvalueTF = new GridBagConstraints();
+			gbc_mvalueTF.insets = new Insets(0, 0, 5, 5);
+			gbc_mvalueTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_mvalueTF.gridx = 2;
+			gbc_mvalueTF.gridy = 6;
+			contentPanel.add(mvalueTF, gbc_mvalueTF);
+			mvalueTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_7 = new JLabel("현금 여부");
@@ -158,14 +163,14 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_7, gbc_lblNewLabel_7);
 		}
 		{
-			textField_5 = new JTextField();
-			GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-			gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_5.gridx = 2;
-			gbc_textField_5.gridy = 7;
-			contentPanel.add(textField_5, gbc_textField_5);
-			textField_5.setColumns(10);
+			cashTF = new JTextField();
+			GridBagConstraints gbc_cashTF = new GridBagConstraints();
+			gbc_cashTF.insets = new Insets(0, 0, 5, 5);
+			gbc_cashTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_cashTF.gridx = 2;
+			gbc_cashTF.gridy = 7;
+			contentPanel.add(cashTF, gbc_cashTF);
+			cashTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_9 = new JLabel("메모");
@@ -177,15 +182,15 @@ public class ReservationInsert extends JDialog {
 			contentPanel.add(lblNewLabel_9, gbc_lblNewLabel_9);
 		}
 		{
-			textField_9 = new JTextField();
-			GridBagConstraints gbc_textField_9 = new GridBagConstraints();
-			gbc_textField_9.gridheight = 2;
-			gbc_textField_9.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_9.fill = GridBagConstraints.BOTH;
-			gbc_textField_9.gridx = 2;
-			gbc_textField_9.gridy = 8;
-			contentPanel.add(textField_9, gbc_textField_9);
-			textField_9.setColumns(10);
+			memoTF = new JTextField();
+			GridBagConstraints gbc_memoTF = new GridBagConstraints();
+			gbc_memoTF.gridheight = 2;
+			gbc_memoTF.insets = new Insets(0, 0, 5, 5);
+			gbc_memoTF.fill = GridBagConstraints.BOTH;
+			gbc_memoTF.gridx = 2;
+			gbc_memoTF.gridy = 8;
+			contentPanel.add(memoTF, gbc_memoTF);
+			memoTF.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -208,8 +213,9 @@ public class ReservationInsert extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 				
 				okButton.addActionListener(e -> {
-				    
-				    dispose();
+					addRsrrvt();
+					administratorLogin.displayAllDesigner();
+//				    dispose();
 				});
 			}
 			{
@@ -228,5 +234,78 @@ public class ReservationInsert extends JDialog {
 			}
 		}
 	}
-
+	public void addRsrrvt() {		
+		String rdate=rdateTF.getText();
+		
+		if(rdate.equals("")) {
+			JOptionPane.showMessageDialog(this, "예약 날짜를 입력해 주세요.");
+			rdateTF.requestFocus();
+			return;
+		}
+		String rtimeString=rtimeTF.getText();
+		
+		if(rtimeString.equals("")) {
+			JOptionPane.showMessageDialog(this, "예약 시간을 입력해 주세요.");
+			rtimeTF.requestFocus();
+			return;
+		}
+		int rtime=Integer.parseInt(rtimeString);
+		
+		String dname=dnameTF.getText();
+		
+		if(dname.equals("")) {
+			JOptionPane.showMessageDialog(this, "예약 디자이너를 입력해 주세요.");
+			dnameTF.requestFocus();
+			return;
+		}
+		String cname=cnameTF.getText();
+		
+		if(cname.equals("")) {
+			JOptionPane.showMessageDialog(this, "예약 회원을 입력해 주세요.");
+			cnameTF.requestFocus();
+			return;
+		}
+		String mvalue=mvalueTF.getText();
+		
+		if(mvalue.equals("")) {
+			JOptionPane.showMessageDialog(this, "예약 시술을 입력해 주세요.");
+			mvalueTF.requestFocus();
+			return;
+		}
+		String cash=cashTF.getText();
+		
+		if(cash.equals("")) {
+			JOptionPane.showMessageDialog(this, "현금 여부를 입력해 주세요.");
+			cashTF.requestFocus();
+			return;
+		}
+		String memo=memoTF.getText();
+		
+		if(memo.equals("")) {
+			JOptionPane.showMessageDialog(this, "메모를 입력해 주세요.");
+			memoTF.requestFocus();
+			return;
+		}		
+		RsrrvtDTO rsrrvt=new RsrrvtDTO();		
+		
+		rsrrvt.setRdate(rdate);
+		rsrrvt.setRtime(rtime);
+		rsrrvt.setDname(dname);
+		rsrrvt.setCname(cname);
+		rsrrvt.setMvalue(mvalue);
+		rsrrvt.setCash(cash);
+		rsrrvt.setMemo(memo);
+		
+		int rows=RsrrvtDAO.get_dao().insertRsrrvt(rsrrvt);
+		
+		if (rows > 0) {
+		JOptionPane.showMessageDialog(this, rows+"개의 예약을 삽입하여 저장 하였습니다.");
+		dispose();
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
+		
+		
+	}
 }
