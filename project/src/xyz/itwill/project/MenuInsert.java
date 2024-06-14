@@ -6,11 +6,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import xyz.itwill.project.dao.MenuDAO;
+import xyz.itwill.project.dao.MenuDTO;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -22,6 +29,8 @@ public class MenuInsert extends JDialog {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	
+	JTextField mnoTF,valueTF,mtimeTF,priceTF;
+	private JTextField textField_3;
 	/**
 	 * Launch the application.
 	 */
@@ -29,7 +38,7 @@ public class MenuInsert extends JDialog {
 		try {
 			MenuInsert dialog = new MenuInsert();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(true);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,9 +60,28 @@ public class MenuInsert extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
+			JLabel lblNewLabel = new JLabel("시술 번호");
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel.gridx = 1;
+			gbc_lblNewLabel.gridy = 1;
+			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
+		}
+		{
+			textField_3 = new JTextField();
+			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_3.gridx = 2;
+			gbc_textField_3.gridy = 1;
+			contentPanel.add(textField_3, gbc_textField_3);
+			textField_3.setColumns(10);
+		}
+		{
 			JLabel lblNewLabel_1 = new JLabel("시술 종류");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_1.gridx = 1;
 			gbc_lblNewLabel_1.gridy = 2;
@@ -72,7 +100,7 @@ public class MenuInsert extends JDialog {
 		{
 			JLabel lblNewLabel_2 = new JLabel("시술 시간");
 			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_2.gridx = 1;
 			gbc_lblNewLabel_2.gridy = 3;
@@ -121,8 +149,9 @@ public class MenuInsert extends JDialog {
 			{
 				JButton okButton = new JButton("등록");
 				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {			
-						
+					public void actionPerformed(ActionEvent e) {	
+						addMenu();
+						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -154,7 +183,90 @@ public class MenuInsert extends JDialog {
 			cancelButton.addActionListener(e -> {
 				dispose(); 
 			});
-		}
+		}			
 	}
-
+	
+	public void addMenu() {		
+		String mnoString=mnoTF.getText();
+		
+		if(mnoString.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 번호를 입력해 주세요.");
+			mnoTF.requestFocus();
+			return;
+		}
+		String mnoReg="^[1-9][0-9]{3}$";
+		if(!Pattern.matches(mnoReg, mnoString)) {
+			JOptionPane.showMessageDialog(this, "시술 번호는 4자리 숫자로만 입력해 주세요.");
+			mnoTF.requestFocus();
+			return;
+		}
+	
+		int mno=Integer.parseInt(mnoString);
+		
+		if(MenuDAO.getDAO().selectMenuByMno(mno) != null) {
+			JOptionPane.showMessageDialog(this, "이미 사용중인 시술 번호를 입력 하였습니다.");
+			valueTF.requestFocus();
+			return;
+		}
+		
+		String value=valueTF.getText();
+		
+		if(value.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 종류를 입력해 주세요.");
+			valueTF.requestFocus();
+			return;
+		}
+		
+		String valueReg="^[가-힣]{2,5}$";
+		if(!Pattern.matches(valueReg, value)) {
+			JOptionPane.showMessageDialog(this, "시술 종류는 2~5 범위의 한글로만 입력해 주세요.");
+			valueTF.requestFocus();
+			return;
+		}
+			
+		String mtimeString=mtimeTF.getText();
+		
+		if(mtimeString.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 시간을 입력해 주세요.");
+			mtimeTF.requestFocus();
+			return;
+		}
+		
+		String mtimeReg="^[1-9][0-9]{3}$";
+		if(!Pattern.matches(mtimeReg, mtimeString)) {
+			JOptionPane.showMessageDialog(this, "시술 시간을 형식에 맞게 입력해 주세요.");
+			mtimeTF.requestFocus();
+			return;
+		}
+		
+		int mtime=Integer.parseInt(mtimeString);
+		
+		String priceString=priceTF.getText();
+		
+		if(priceString.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 가격을 입력해 주세요.");
+			priceTF.requestFocus();
+			return;
+		}
+		
+		String priceReg="^[1-9][0-9]{3}$";
+		if(!Pattern.matches(priceReg, priceString)) {
+			JOptionPane.showMessageDialog(this, "시술 가격을 형식에 맞게 입력해 주세요.");
+			priceTF.requestFocus();
+			return;
+		}
+		
+		int price=Integer.parseInt(priceString);
+		
+		MenuDTO menu=new MenuDTO();
+		menu.setMno(mno);
+		menu.setValue(value);
+		menu.setMtime(mtime);
+		menu.setPrice(price);
+		
+		int rows=MenuDAO.getDAO().insertMenu(menu);
+		
+		JOptionPane.showMessageDialog(this, rows+"개의 시술을 삽입하여 저장 하였습니다.");
+		
+	}
 }
