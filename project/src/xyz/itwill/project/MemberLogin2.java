@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -31,6 +32,7 @@ import xyz.itwill.project.dao.MenuDAO;
 import xyz.itwill.project.dao.MenuDTO;
 import xyz.itwill.project.dao.RsrrvtDAO;
 import xyz.itwill.project.dao.RsrrvtDTO;
+import javax.swing.JCheckBox;
 
 public class MemberLogin2 extends JFrame {
 
@@ -45,7 +47,7 @@ public class MemberLogin2 extends JFrame {
 	private JTable mTable;
 	private JTextField select_Date;
 	private JTextField select_dName;
-	private JTextField select_mName;
+	private JTextField select_mValue;
 	private JTable rTable;
 	private String login_id;
 	private String login_name;
@@ -55,7 +57,20 @@ public class MemberLogin2 extends JFrame {
 	private JComboBox mcomboBox;
 	private JComboBox dcomboBox;
 	private boolean getDate_Status;
-
+	private String final_Rdate;		
+	private int final_Rtime;
+	private String final_Rdid;  
+//	private String final_Rcid;		login_id로 대체
+	private int final_Menu_No;
+	private String final_Memo;
+	private int final_Payment;
+	private String final_Cash;
+	private String final_Status;
+	private JTextField select_Memo;
+	private JCheckBox cashCheckBox;
+	
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -74,13 +89,12 @@ public class MemberLogin2 extends JFrame {
 	 */
 	public MemberLogin2() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 680, 733);
+		setBounds(100, 100, 680, 734);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		login_name = "김수지";
-		System.out.println("1"); //tp1
-		
+		login_id = "oao";
+		login_name = "김수지";		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -129,12 +143,16 @@ public class MemberLogin2 extends JFrame {
 							String getMonth = mcomboBox.getSelectedItem().toString();
 							String getDay = dcomboBox.getSelectedItem().toString();
 							
+							final_Rdate = getYear+"-"+getMonth+"-"+getDay;
+							final_Rtime = Integer.parseInt(actionbutton.getText().substring(29, 30));
 							select_Date.setText(getYear+"-"+getMonth+"-"+getDay+"  "+(actionbutton.getText().substring(29, 30)+"시"));
 						} else {
 							String getYear = ycomboBox.getSelectedItem().toString();
 							String getMonth = mcomboBox.getSelectedItem().toString();
 							String getDay = dcomboBox.getSelectedItem().toString();
 							
+							final_Rdate = getYear+"-"+getMonth+"-"+getDay;
+							final_Rtime = Integer.parseInt(actionbutton.getText().substring(29, 31));
 							select_Date.setText(getYear+"-"+getMonth+"-"+getDay+"  "+(actionbutton.getText().substring(29, 31)+"시"));
 
 							
@@ -146,19 +164,19 @@ public class MemberLogin2 extends JFrame {
 			});
 		}
 		JPanel buttonPane = new JPanel();
-		buttonPane.setBounds(446, 650, 209, 43);
+		buttonPane.setBounds(469, 648, 186, 43);
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		buttonPane.setLayout(null);
 		{
 			JButton okButton = new JButton("로그아웃");
-			okButton.setBounds(25, 6, 95, 30);
+			okButton.setBounds(12, 6, 95, 30);
 			okButton.setActionCommand("OK");
 			buttonPane.add(okButton);
 			getRootPane().setDefaultButton(okButton);
 		}
 		{
 			JButton cancelButton = new JButton("종료");
-			cancelButton.setBounds(132, 6, 65, 30);
+			cancelButton.setBounds(112, 6, 65, 30);
 			cancelButton.setActionCommand("Cancel");
 			buttonPane.add(cancelButton);
 		}
@@ -223,7 +241,7 @@ public class MemberLogin2 extends JFrame {
 
 		mTable = new JTable();
 		mscrollPane.setViewportView(mTable);
-		mTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "종류", "시술 시간", "가격" }));
+		mTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "메뉴 번호","종류", "시술 시간", "가격" }));
 		mTable.getTableHeader().setReorderingAllowed(false);
 		mTable.getTableHeader().setResizingAllowed(false);
 
@@ -238,9 +256,14 @@ public class MemberLogin2 extends JFrame {
 					int selectedRow = mTable.getSelectedRow();
 					if (selectedRow != -1) {
 
-						String name = (String) (mTable.getValueAt(selectedRow, 0));
+						Integer no = (Integer) (mTable.getValueAt(selectedRow, 0));
+						String value = (String) (mTable.getValueAt(selectedRow, 1));
+						Integer price = (Integer) (mTable.getValueAt(selectedRow, 3));
 
-						select_mName.setText(name);
+						select_mValue.setText(value);
+						
+						final_Menu_No = no;
+						final_Payment = price;						
 
 					}
 				}
@@ -271,6 +294,8 @@ public class MemberLogin2 extends JFrame {
 						String name = (String) (dTable.getValueAt(selectedRow, 0));
 
 						select_dName.setText(name);
+						
+						final_Rdid = name;
 
 					}
 				}
@@ -283,6 +308,7 @@ public class MemberLogin2 extends JFrame {
 		panel_1.setLayout(null);
 
 		select_Date = new JTextField();
+		select_Date.setEnabled(false);
 		select_Date.setHorizontalAlignment(SwingConstants.CENTER);
 		select_Date.setFont(new Font("굴림", Font.PLAIN, 13));
 		select_Date.setBounds(387, 7, 125, 27);
@@ -290,6 +316,7 @@ public class MemberLogin2 extends JFrame {
 		select_Date.setColumns(10);
 
 		select_dName = new JTextField();
+		select_dName.setEnabled(false);
 		select_dName.setHorizontalAlignment(SwingConstants.CENTER);
 		select_dName.setFont(new Font("굴림", Font.PLAIN, 14));
 		select_dName.setColumns(10);
@@ -306,12 +333,13 @@ public class MemberLogin2 extends JFrame {
 		lblNewLabel_2_1.setBounds(175, 13, 50, 17);
 		panel_1.add(lblNewLabel_2_1);
 
-		select_mName = new JTextField();
-		select_mName.setHorizontalAlignment(SwingConstants.CENTER);
-		select_mName.setFont(new Font("굴림", Font.PLAIN, 14));
-		select_mName.setColumns(10);
-		select_mName.setBounds(217, 7, 116, 27);
-		panel_1.add(select_mName);
+		select_mValue = new JTextField();
+		select_mValue.setEnabled(false);
+		select_mValue.setHorizontalAlignment(SwingConstants.CENTER);
+		select_mValue.setFont(new Font("굴림", Font.PLAIN, 14));
+		select_mValue.setColumns(10);
+		select_mValue.setBounds(217, 7, 116, 27);
+		panel_1.add(select_mValue);
 
 		JLabel lblNewLabel_2_1_1 = new JLabel("날짜 :");
 		lblNewLabel_2_1_1.setFont(new Font("굴림", Font.BOLD, 14));
@@ -319,6 +347,61 @@ public class MemberLogin2 extends JFrame {
 		panel_1.add(lblNewLabel_2_1_1);
 
 		JButton btnNewButton_1 = new JButton("예약하기");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (select_dName.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "디자이너를 선택해 주세요");
+					select_dName.requestFocus();
+					return;
+				}
+				if (select_mValue.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "시술 받으실 메뉴를 선택해 주세요");
+					select_mValue.requestFocus();
+					return;
+				}
+				if (select_Date.getText().isBlank()) {
+					JOptionPane.showMessageDialog(null, "예약 날짜 및 시간을 선택해주세요.");
+					return;
+				}
+				
+				final_Memo = select_Memo.getText();
+				final_Status = "1";
+				
+				if (cashCheckBox.isSelected()) {
+					final_Cash = "2";
+				} else {
+					final_Cash = "1";
+					
+				}
+					
+				
+				
+				System.out.println("final_Rdate = " + final_Rdate);
+				System.out.println("final_Rtime = " + final_Rtime);
+				System.out.println("final_Rdid = " + final_Rdid);
+				System.out.println("login_id = " + login_id);
+				System.out.println("final_Menu_No = " + final_Menu_No);
+				System.out.println("final_Memo = " + final_Memo);
+				System.out.println("final_Payment = " + final_Payment);
+				System.out.println("final_Cash = " + final_Cash);
+				System.out.println("final_Status = " + final_Status);
+
+//				private String final_Rdate;			
+//				private int final_Rtime;
+//				private String final_Rdid;			완료
+//				private String final_Rcid;			- login_id 로 대체
+//				private int final_Menu_No;			완료
+//				private String final_Memo;			- select_Memo.getText
+//				private int final_Payment;			완료
+//				private String final_Cash;			cashCheckBox check = 2(현금)
+//				private String final_Status;		char '1' (예약중)	
+				
+				
+
+				
+				
+			}
+		});
 		btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 14));
 		btnNewButton_1.setBounds(524, 5, 97, 31);
 		panel_1.add(btnNewButton_1);
@@ -334,8 +417,6 @@ public class MemberLogin2 extends JFrame {
 				new String[] { "예약번호", "예약날짜", "예약시간", "디자이너", "시술명", "결제금액", "결제수단", "예약상태", "메모" }));
 		rTable.getTableHeader().setReorderingAllowed(false);
 		rTable.getTableHeader().setResizingAllowed(false);
-		System.out.println("2"); //tp2
-		System.out.println(login_name);
 
 		// 예약 테이블 불러오기
 		displayAllRsrrvt();
@@ -352,6 +433,32 @@ public class MemberLogin2 extends JFrame {
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setBounds(22, 8, 60, 25);
 		contentPane.add(lblNewLabel_3_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(22, 648, 443, 43);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("현금결제 :");
+		lblNewLabel_2_2.setFont(new Font("굴림", Font.BOLD, 14));
+		lblNewLabel_2_2.setBounds(12, 13, 80, 17);
+		panel_2.add(lblNewLabel_2_2);
+		
+		select_Memo = new JTextField();
+		select_Memo.setFont(new Font("굴림", Font.PLAIN, 14));
+		select_Memo.setColumns(10);
+		select_Memo.setBounds(187, 7, 253, 28);
+		panel_2.add(select_Memo);
+		
+		JLabel lblNewLabel_2_2_1 = new JLabel("요청사항 :");
+		lblNewLabel_2_2_1.setFont(new Font("굴림", Font.BOLD, 14));
+		lblNewLabel_2_2_1.setBounds(115, 13, 80, 17);
+		panel_2.add(lblNewLabel_2_2_1);
+		
+		cashCheckBox = new JCheckBox("");
+		cashCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
+		cashCheckBox.setBounds(80, 8, 25, 25);
+		panel_2.add(cashCheckBox);
 		dTable.getTableHeader().setReorderingAllowed(false);
 		dTable.getTableHeader().setResizingAllowed(false);
 	}
@@ -390,8 +497,9 @@ public class MemberLogin2 extends JFrame {
 		for (MenuDTO menu : menuList) {
 			Vector<Object> rowData = new Vector<Object>();
 
+			rowData.add(menu.getMno());
 			rowData.add(menu.getValue());
-			rowData.add(menu.getMtime());
+			rowData.add(menu.getMtime()+" 시간");
 			rowData.add(menu.getPrice());
 
 			defaultTableModel.addRow(rowData);
@@ -465,5 +573,4 @@ public class MemberLogin2 extends JFrame {
 		
 
 	}
-
 }
