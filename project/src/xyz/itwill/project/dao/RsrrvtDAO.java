@@ -169,6 +169,47 @@ public class RsrrvtDAO extends JdbcDAO {
 		}
 		return rsrrvtList;
 	}
+	public List<RsrrvtDTO> selectRsrrvtbyDnama(String cname) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+		List<RsrrvtDTO> rsrrvtList = new ArrayList<RsrrvtDTO>();
+		
+		try {
+			con = getConnection();
+			
+			String sql = "select rno,rdate,rtime,designer.name dname,customer.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join customer on customer.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where customer.name like '%'||?||'%' order by rdate desc, rtime desc";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, cname);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				RsrrvtDTO rsrrvt = new RsrrvtDTO();
+				
+				rsrrvt.setRno(rs.getInt("rno"));
+				rsrrvt.setRdate(rs.getString("rdate"));
+				rsrrvt.setRtime(rs.getInt("rtime"));
+				rsrrvt.setDname(rs.getString("dname"));
+				rsrrvt.setCname(rs.getString("cname"));
+				rsrrvt.setMvalue(rs.getString("mvalue"));
+				rsrrvt.setPayment(rs.getInt("payment"));
+				rsrrvt.setCash(rs.getString("cash"));
+				rsrrvt.setStatus(rs.getString("status"));
+				rsrrvt.setMemo(rs.getString("memo"));
+				
+				rsrrvtList.add(rsrrvt);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("[에러]selectRsrrvtbyRdate() 메소드의 SQL 오류 = " + e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return rsrrvtList;
+	}
 
 	public List<RsrrvtDTO> selectRsrrvtAll() {
 		Connection con = null;

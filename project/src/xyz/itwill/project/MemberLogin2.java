@@ -54,7 +54,7 @@ public class MemberLogin2 extends JFrame {
 	private JComboBox ycomboBox;
 	private JComboBox mcomboBox;
 	private JComboBox dcomboBox;
-	private boolean getDate_Status = false;
+	private boolean getDate_Status;
 
 	/**
 	 * Launch the application.
@@ -78,6 +78,9 @@ public class MemberLogin2 extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
+		login_name = "김수지";
+		System.out.println("1"); //tp1
+		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -90,19 +93,21 @@ public class MemberLogin2 extends JFrame {
 		// 예약시간 버튼 생성
 		buttons = new JButton[buttonTimeMax - buttonTimeMin + 1];
 		for (int i = buttonTimeMin; i <= buttonTimeMax; i++) {
-//			startNum = 9;     상단 필드 참조
+//			startNum = 9;     최상단 필드 참조
 //			closeNum = 18;
 			JButton tButton = new JButton("<html><center><font size = 4>" + i + ":00<br>예약 가능</html>");
 			buttons[i - buttonTimeMin] = tButton;
+			tButton.setEnabled(false); // 조회전 비활성화
+			
 			panel.add(tButton);
 
 			if (i < openTime) {
-				tButton.setEnabled(false);
+//				tButton.setEnabled(false);
 				tButton.setBackground(Color.gray);
 				tButton.setText(tButton.getText().replace("예약 가능", "영업 전"));
 
 			} else if (i > closeTime) {
-				tButton.setEnabled(false);
+//				tButton.setEnabled(false);
 				tButton.setBackground(Color.gray);
 				tButton.setText(tButton.getText().replace("예약 가능", "영업 종료"));
 
@@ -329,11 +334,13 @@ public class MemberLogin2 extends JFrame {
 				new String[] { "예약번호", "예약날짜", "예약시간", "디자이너", "시술명", "결제금액", "결제수단", "예약상태", "메모" }));
 		rTable.getTableHeader().setReorderingAllowed(false);
 		rTable.getTableHeader().setResizingAllowed(false);
+		System.out.println("2"); //tp2
+		System.out.println(login_name);
 
 		// 예약 테이블 불러오기
 		displayAllRsrrvt();
 
-		JLabel lblNewLabel_3 = new JLabel(login_name + " 님 환영합니다.");
+		JLabel lblNewLabel_3 = new JLabel(login_name + " 고객님 환영합니다.");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_3.setBounds(443, 10, 209, 15);
 		contentPane.add(lblNewLabel_3);
@@ -394,7 +401,7 @@ public class MemberLogin2 extends JFrame {
 	}
 
 	public void displayAllRsrrvt() {
-		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtAll();
+		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyDnama(login_name);
 
 		if (rsrrvtList.isEmpty()) { // 표 초기화 코드 제외
 			return;
