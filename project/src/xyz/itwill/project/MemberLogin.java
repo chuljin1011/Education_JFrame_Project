@@ -110,8 +110,8 @@ public class MemberLogin extends JFrame {
 					
 					break;
 				case 2 :
-					ReservationInsert reservationInsertdialog = new ReservationInsert();
-					reservationInsertdialog.setVisible(true);
+//					ReservationInsert reservationInsertdialog = new ReservationInsert();
+//					reservationInsertdialog.setVisible(true);
 					break;
 				default:						
 					break;

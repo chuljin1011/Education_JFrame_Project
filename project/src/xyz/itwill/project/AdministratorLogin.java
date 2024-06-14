@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import xyz.itwill.project.dao.CustomerDAO;
@@ -38,11 +40,39 @@ public class AdministratorLogin extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
-	private JTable table_2;
+	private JTable mTable;
 	private JTable table_3;
+	
+	// Insert Frame
 	MenuInsert menuInsertdialog;
 	DesignerInsert designerInsertdialog;
 	ReservationInsert reservationInsertdialog;
+	
+	// Update Frame
+	MenuUpdate menuUpdatedialog;
+	DesignerUpdate designerUpdatedialog;
+	
+	
+	// 시술 변경 변수 //
+	int pushMno;
+	String pushValue;
+	int pushMtime;
+	int pushPrice;
+	
+	// 디자이너 변경 변수 //
+	
+	
+
+	
+	// 회원 변경 변수 //
+
+	
+	// 예약 변경 변수 //
+
+	
+	 
+	
+	
 	
 	/**
 	 * Launch the application.
@@ -71,9 +101,16 @@ public class AdministratorLogin extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
+		// insert Frame
 		menuInsertdialog = new MenuInsert(this);
 		designerInsertdialog = new DesignerInsert(this);
 		reservationInsertdialog = new ReservationInsert(this);
+		
+		
+		
+		
+		
+		
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -85,14 +122,41 @@ public class AdministratorLogin extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		tabbedPane.addTab("시술 관리", null, scrollPane_2, null);
 		
-		table_2 = new JTable();
-		scrollPane_2.setViewportView(table_2);
-		table_2.setModel(new DefaultTableModel(new Object[][] {},
+		mTable = new JTable();
+		scrollPane_2.setViewportView(mTable);
+		mTable.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"번호","종류","시간","가격"}));
-		table_2.setEnabled(false);
-		table_2.getTableHeader().setReorderingAllowed(false);
-		table_2.getTableHeader().setResizingAllowed(false);
-			
+		mTable.getTableHeader().setReorderingAllowed(false);
+		mTable.getTableHeader().setResizingAllowed(false);
+		mTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					int selectedRow = mTable.getSelectedRow();
+
+						Integer mno = (Integer) (mTable.getValueAt(selectedRow, 0));
+						String value = (String) (mTable.getValueAt(selectedRow, 1));
+						Integer mtime = (Integer) (mTable.getValueAt(selectedRow, 2));
+						Integer price = (Integer) (mTable.getValueAt(selectedRow, 3));
+
+						pushMno = mno;
+						pushValue = value;
+						pushMtime = mtime;
+						pushPrice = price;
+						
+						
+
+					
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("디자이너 관리", null, scrollPane, null);
 		
@@ -216,11 +280,11 @@ public class AdministratorLogin extends JFrame {
 				int sel = tabbedPane.getSelectedIndex();
 				switch (sel) {
 				case 0 :
-					MenuUpdate menuUpdatedialog = new MenuUpdate();
+					menuUpdatedialog = new MenuUpdate(AdministratorLogin.this);
 					menuUpdatedialog.setVisible(true);
 					break;
 				case 1 :
-					DesignerUpdate designerUpdatedialog = new DesignerUpdate();
+					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
 					designerUpdatedialog.setVisible(true);
 					break;
 				case 2 :
@@ -265,7 +329,7 @@ public class AdministratorLogin extends JFrame {
 		
 		
 		
-		DefaultTableModel defaultTableModel=(DefaultTableModel)table_2.getModel();
+		DefaultTableModel defaultTableModel=(DefaultTableModel)mTable.getModel();
 		
 		defaultTableModel.setNumRows(0);
 				

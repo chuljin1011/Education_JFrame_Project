@@ -30,20 +30,11 @@ public class DesignerUpdate extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			DesignerUpdate dialog = new DesignerUpdate();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public DesignerUpdate() {
+	public DesignerUpdate(AdministratorLogin administratorLogin) {
 		setTitle("디자이너 수정");
 		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
