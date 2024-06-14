@@ -14,6 +14,9 @@ import xyz.itwill.project.dao.DesignerDAO;
 import xyz.itwill.project.dao.DesignerDTO;
 import xyz.itwill.project.dao.MenuDAO;
 import xyz.itwill.project.dao.MenuDTO;
+import xyz.itwill.project.dao.RsrrvtDAO;
+import xyz.itwill.project.dao.RsrrvtDTO;
+
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -28,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
+
 public class AdministratorLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +42,7 @@ public class AdministratorLogin extends JFrame {
 	private JTable table_3;
 	MenuInsert menuInsertdialog;
 	DesignerInsert designerInsertdialog;
+	ReservationInsert reservationInsertdialog;
 	
 	/**
 	 * Launch the application.
@@ -68,7 +73,8 @@ public class AdministratorLogin extends JFrame {
 		
 		menuInsertdialog = new MenuInsert(this);
 		designerInsertdialog = new DesignerInsert(this);
-
+		reservationInsertdialog = new ReservationInsert(this);
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -154,7 +160,7 @@ public class AdministratorLogin extends JFrame {
 					memberInsertdialog.setVisible(true);
 					break;
 				case 3 :
-					ReservationInsert reservationInsertdialog = new ReservationInsert();
+					//ReservationInsert reservationInsertdialog = new ReservationInsert();
 					reservationInsertdialog.setVisible(true);
 					break;
 				default:	
@@ -247,6 +253,7 @@ public class AdministratorLogin extends JFrame {
 		displayAllMenu();
 		displayAllDesigner();
 		displayAllCustomer();	
+		displayAllRsrrvt();
 	}
 		
 	public void displayAllMenu() {
@@ -331,4 +338,38 @@ public class AdministratorLogin extends JFrame {
 			defaultTableModel.addRow(rowData);
 		}
 	}	
+	
+	public void displayAllRsrrvt() {
+		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtAll();
+
+		if (rsrrvtList.isEmpty()) {
+			JOptionPane.showMessageDialog(this, "저장된 예약 정보가 없습니다.");
+			return;
+		}
+
+		DefaultTableModel defaultTableModel = (DefaultTableModel) table_3.getModel();
+
+		for (RsrrvtDTO rsrrvt : rsrrvtList) {
+			
+			Vector<Object> rowData = new Vector<Object>();
+
+			rowData.add(rsrrvt.getRno());
+			rowData.add(rsrrvt.getRdate());
+			rowData.add(rsrrvt.getRtime());
+			rowData.add(rsrrvt.getDname());
+			rowData.add(rsrrvt.getCname());
+			rowData.add(rsrrvt.getMvalue());
+			rowData.add(rsrrvt.getPayment());
+			rowData.add(rsrrvt.getCash());
+			rowData.add(rsrrvt.getStatus());
+			rowData.add(rsrrvt.getMemo());
+
+			defaultTableModel.addRow(rowData);
+
+		}
+		
+	}
+	
+	
+	
 }
