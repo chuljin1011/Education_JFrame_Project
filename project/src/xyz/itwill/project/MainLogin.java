@@ -16,8 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import xyz.itwill.project.dao.CustomerDAO;
-import xyz.itwill.project.dao.CustomerDTO;
+import xyz.itwill.project.dao.MemberDAO;
+import xyz.itwill.project.dao.MemberDTO;
 import xyz.itwill.project.dao.DesignerDAO;
 import xyz.itwill.project.dao.DesignerDTO;
 
@@ -200,7 +200,7 @@ public class MainLogin extends JFrame {
 		    	
 		        if (chckbxMember.isSelected()) {	// 손님 로그인      	
 		        	
-		        	CustomerDTO customr = CustomerDAO.getDAO().selectCustomerByID(login_id);
+		        	MemberDTO customr = MemberDAO.getDAO().selectMemberByID(login_id);
 		        	if(customr == null) {	// 해당 id가 존재하지 않는경우
 		    			JOptionPane.showMessageDialog(null, "ID가 존재하지 않습니다.");
 		    			idField.requestFocus();

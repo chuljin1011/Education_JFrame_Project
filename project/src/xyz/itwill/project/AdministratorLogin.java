@@ -10,8 +10,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import xyz.itwill.project.dao.CustomerDAO;
-import xyz.itwill.project.dao.CustomerDTO;
+import xyz.itwill.project.dao.MemberDAO;
+import xyz.itwill.project.dao.MemberDTO;
 import xyz.itwill.project.dao.DesignerDAO;
 import xyz.itwill.project.dao.DesignerDTO;
 import xyz.itwill.project.dao.MenuDAO;
@@ -316,7 +316,7 @@ public class AdministratorLogin extends JFrame {
 		
 		displayAllMenu();
 		displayAllDesigner();
-		displayAllCustomer();	
+		displayAllmember();	
 		displayAllRsrrvt();
 	}
 		
@@ -376,28 +376,28 @@ public class AdministratorLogin extends JFrame {
 		}
 	}
 	
-	public void displayAllCustomer() {
-		List<CustomerDTO> CustomerList=CustomerDAO.getDAO().selectCustomerAll();
-		if(CustomerList.isEmpty()) {
+	public void displayAllmember() {
+		List<MemberDTO> memberList=MemberDAO.getDAO().selectMemberAll();
+		if(memberList.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "저장된 회원 정보가 없습니다.");
 			return;
 		}
 		
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table_1.getModel();
 				
-		for(CustomerDTO customer : CustomerList) {
+		for(MemberDTO member : memberList) {
 			
 			Vector<Object> rowData=new Vector<Object>();
 			
-			rowData.add(customer.getId());
-			rowData.add(customer.getPw());
-			rowData.add(customer.getBirth().substring(0, 10));
-			rowData.add(customer.getName());
-			rowData.add(customer.getGender());
-			rowData.add(customer.getPhone());
-			rowData.add(customer.getJoin_date().substring(0, 10));
-			rowData.add(customer.getUsed_count());
-			rowData.add(customer.getMemo());
+			rowData.add(member.getId());
+			rowData.add(member.getPw());
+			rowData.add(member.getBirth().substring(0, 10));
+			rowData.add(member.getName());
+			rowData.add(member.getGender());
+			rowData.add(member.getPhone());
+			rowData.add(member.getJoin_date().substring(0, 10));
+			rowData.add(member.getUsed_count());
+			rowData.add(member.getMemo());
 						
 			defaultTableModel.addRow(rowData);
 		}

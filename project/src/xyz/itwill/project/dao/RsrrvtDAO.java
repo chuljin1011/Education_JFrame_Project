@@ -96,7 +96,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select rno,rdate,rtime,designer.name dname,customer.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join customer on customer.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rno = ? order by rdate desc, rtime desc";
+			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rno = ? order by rdate desc, rtime desc";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, rno);
@@ -138,7 +138,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select rno,rdate,rtime,designer.name dname,customer.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join customer on customer.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rdate = ? order by rdate desc, rtime desc";
+			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rdate = ? order by rdate desc, rtime desc";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, rdate);
@@ -179,7 +179,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 			
-			String sql = "select rno,rdate,rtime,designer.name dname,customer.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join customer on customer.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where customer.name like '%'||?||'%' order by rdate desc, rtime desc";
+			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where member.name like '%'||?||'%' order by rdate desc, rtime desc";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, cname);
@@ -221,7 +221,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select rno,rdate,rtime,designer.name dname,customer.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join customer on customer.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no order by rdate desc, rtime desc";
+			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no order by rdate desc, rtime desc";
 			pstmt = con.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
