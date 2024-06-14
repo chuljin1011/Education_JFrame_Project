@@ -19,6 +19,7 @@ public class MenuUpdate extends JDialog {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
 
 	/**
 	 * Launch the application.
@@ -49,9 +50,28 @@ public class MenuUpdate extends JDialog {
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
+			JLabel lblNewLabel = new JLabel("시술 번호");
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+			gbc_lblNewLabel.gridx = 1;
+			gbc_lblNewLabel.gridy = 1;
+			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
+		}
+		{
+			textField_3 = new JTextField();
+			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_3.gridx = 2;
+			gbc_textField_3.gridy = 1;
+			contentPanel.add(textField_3, gbc_textField_3);
+			textField_3.setColumns(10);
+		}
+		{
 			JLabel lblNewLabel_3 = new JLabel("시술 종류");
 			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-			gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_3.gridx = 1;
 			gbc_lblNewLabel_3.gridy = 2;
@@ -70,7 +90,7 @@ public class MenuUpdate extends JDialog {
 		{
 			JLabel lblNewLabel_1 = new JLabel("시술 시간");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 			gbc_lblNewLabel_1.gridx = 1;
 			gbc_lblNewLabel_1.gridy = 3;

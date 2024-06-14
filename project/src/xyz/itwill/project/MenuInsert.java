@@ -25,29 +25,29 @@ public class MenuInsert extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField priceTF;
+	private JTextField valueTF;
+	private JTextField mtimeTF;
+	private JTextField mnoTF;
 	
-	JTextField mnoTF,valueTF,mtimeTF,priceTF;
-	private JTextField textField_3;
+//	JTextField mnoTF,valueTF,mtimeTF,priceTF;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		try {
-			MenuInsert dialog = new MenuInsert();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			MenuInsert dialog = new MenuInsert();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public MenuInsert() {
+	public MenuInsert(AdministratorLogin administratorLogin) {
 		setTitle("시술 등록");
 		setBounds(100, 100, 450, 400);
 		getContentPane().setLayout(new BorderLayout());
@@ -69,14 +69,15 @@ public class MenuInsert extends JDialog {
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
 		{
-			textField_3 = new JTextField();
-			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_3.gridx = 2;
-			gbc_textField_3.gridy = 1;
-			contentPanel.add(textField_3, gbc_textField_3);
-			textField_3.setColumns(10);
+			mnoTF = new JTextField();
+			mnoTF.setEnabled(false);
+			GridBagConstraints gbc_mnoTF = new GridBagConstraints();
+			gbc_mnoTF.insets = new Insets(0, 0, 5, 5);
+			gbc_mnoTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_mnoTF.gridx = 2;
+			gbc_mnoTF.gridy = 1;
+			contentPanel.add(mnoTF, gbc_mnoTF);
+			mnoTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("시술 종류");
@@ -88,14 +89,14 @@ public class MenuInsert extends JDialog {
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		}		
 		{
-			textField_1 = new JTextField();
-			GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-			gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_1.gridx = 2;
-			gbc_textField_1.gridy = 2;
-			contentPanel.add(textField_1, gbc_textField_1);
-			textField_1.setColumns(10);
+			valueTF = new JTextField();
+			GridBagConstraints gbc_valueTF = new GridBagConstraints();
+			gbc_valueTF.insets = new Insets(0, 0, 5, 5);
+			gbc_valueTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_valueTF.gridx = 2;
+			gbc_valueTF.gridy = 2;
+			contentPanel.add(valueTF, gbc_valueTF);
+			valueTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("시술 시간");
@@ -107,14 +108,14 @@ public class MenuInsert extends JDialog {
 			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		}		
 		{
-			textField_2 = new JTextField();
-			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-			gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField_2.gridx = 2;
-			gbc_textField_2.gridy = 3;
-			contentPanel.add(textField_2, gbc_textField_2);
-			textField_2.setColumns(10);
+			mtimeTF = new JTextField();
+			GridBagConstraints gbc_mtimeTF = new GridBagConstraints();
+			gbc_mtimeTF.insets = new Insets(0, 0, 5, 5);
+			gbc_mtimeTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_mtimeTF.gridx = 2;
+			gbc_mtimeTF.gridy = 3;
+			contentPanel.add(mtimeTF, gbc_mtimeTF);
+			mtimeTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("시술 가격");
@@ -126,14 +127,14 @@ public class MenuInsert extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			textField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.insets = new Insets(0, 0, 0, 5);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 2;
-			gbc_textField.gridy = 4;
-			contentPanel.add(textField, gbc_textField);
-			textField.setColumns(10);
+			priceTF = new JTextField();
+			GridBagConstraints gbc_priceTF = new GridBagConstraints();
+			gbc_priceTF.insets = new Insets(0, 0, 0, 5);
+			gbc_priceTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_priceTF.gridx = 2;
+			gbc_priceTF.gridy = 4;
+			contentPanel.add(priceTF, gbc_priceTF);
+			priceTF.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -151,7 +152,8 @@ public class MenuInsert extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {	
 						addMenu();
-						dispose();
+						administratorLogin.displayAllMenu();
+//						dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -163,9 +165,9 @@ public class MenuInsert extends JDialog {
 				buttonPane.add(okButton, gbc_okButton);
 				getRootPane().setDefaultButton(okButton);
 				
-				okButton.addActionListener(e -> {
-					 dispose();
-				});
+//				okButton.addActionListener(e -> {
+//					 dispose();
+//				});
 			}
 			JButton cancelButton = new JButton("취소");
 			cancelButton.addActionListener(new ActionListener() {
@@ -187,27 +189,27 @@ public class MenuInsert extends JDialog {
 	}
 	
 	public void addMenu() {		
-		String mnoString=mnoTF.getText();
-		
-		if(mnoString.equals("")) {
-			JOptionPane.showMessageDialog(this, "시술 번호를 입력해 주세요.");
-			mnoTF.requestFocus();
-			return;
-		}
-		String mnoReg="^[1-9][0-9]{3}$";
-		if(!Pattern.matches(mnoReg, mnoString)) {
-			JOptionPane.showMessageDialog(this, "시술 번호는 4자리 숫자로만 입력해 주세요.");
-			mnoTF.requestFocus();
-			return;
-		}
+//		String mnoString=mnoTF.getText();
+//		
+//		if(mnoString.equals("")) {
+//			JOptionPane.showMessageDialog(this, "시술 번호를 입력해 주세요.");
+//			mnoTF.requestFocus();
+//			return;
+//		}
+//		String mnoReg="^[1-9][0-9]{3}$";
+//		if(!Pattern.matches(mnoReg, mnoString)) {
+//			JOptionPane.showMessageDialog(this, "시술 번호는 4자리 숫자로만 입력해 주세요.");
+//			mnoTF.requestFocus();
+//			return;
+//		}
 	
-		int mno=Integer.parseInt(mnoString);
-		
-		if(MenuDAO.getDAO().selectMenuByMno(mno) != null) {
-			JOptionPane.showMessageDialog(this, "이미 사용중인 시술 번호를 입력 하였습니다.");
-			valueTF.requestFocus();
-			return;
-		}
+//		int mno=Integer.parseInt(mnoString);
+//		
+//		if(MenuDAO.getDAO().selectMenuByMno(mno) != null) {
+//			JOptionPane.showMessageDialog(this, "이미 사용중인 시술 번호를 입력 하였습니다.");
+//			valueTF.requestFocus();
+//			return;
+//		}
 		
 		String value=valueTF.getText();
 		
@@ -217,12 +219,12 @@ public class MenuInsert extends JDialog {
 			return;
 		}
 		
-		String valueReg="^[가-힣]{2,5}$";
-		if(!Pattern.matches(valueReg, value)) {
-			JOptionPane.showMessageDialog(this, "시술 종류는 2~5 범위의 한글로만 입력해 주세요.");
-			valueTF.requestFocus();
-			return;
-		}
+//		String valueReg="^[가-힣]{2,5}$";
+//		if(!Pattern.matches(valueReg, value)) {
+//			JOptionPane.showMessageDialog(this, "시술 종류는 2~5 범위의 한글로만 입력해 주세요.");
+//			valueTF.requestFocus();
+//			return;
+//		}
 			
 		String mtimeString=mtimeTF.getText();
 		
@@ -232,13 +234,13 @@ public class MenuInsert extends JDialog {
 			return;
 		}
 		
-		String mtimeReg="^[1-9][0-9]{3}$";
-		if(!Pattern.matches(mtimeReg, mtimeString)) {
-			JOptionPane.showMessageDialog(this, "시술 시간을 형식에 맞게 입력해 주세요.");
-			mtimeTF.requestFocus();
-			return;
-		}
-		
+//		String mtimeReg="^[1-9][0-9]{3}$";
+//		if(!Pattern.matches(mtimeReg, mtimeString)) {
+//			JOptionPane.showMessageDialog(this, "시술 시간을 형식에 맞게 입력해 주세요.");
+//			mtimeTF.requestFocus();
+//			return;
+//		}
+//		
 		int mtime=Integer.parseInt(mtimeString);
 		
 		String priceString=priceTF.getText();
@@ -249,24 +251,30 @@ public class MenuInsert extends JDialog {
 			return;
 		}
 		
-		String priceReg="^[1-9][0-9]{3}$";
-		if(!Pattern.matches(priceReg, priceString)) {
-			JOptionPane.showMessageDialog(this, "시술 가격을 형식에 맞게 입력해 주세요.");
-			priceTF.requestFocus();
-			return;
-		}
+//		String priceReg="^[1-9][0-9]{3}$";
+//		if(!Pattern.matches(priceReg, priceString)) {
+//			JOptionPane.showMessageDialog(this, "시술 가격을 형식에 맞게 입력해 주세요.");
+//			priceTF.requestFocus();
+//			return;
+//		}
 		
 		int price=Integer.parseInt(priceString);
 		
 		MenuDTO menu=new MenuDTO();
-		menu.setMno(mno);
+		//menu.setMno(mno);
 		menu.setValue(value);
 		menu.setMtime(mtime);
 		menu.setPrice(price);
 		
 		int rows=MenuDAO.getDAO().insertMenu(menu);
 		
+		if (rows > 0) {
 		JOptionPane.showMessageDialog(this, rows+"개의 시술을 삽입하여 저장 하였습니다.");
+		dispose();
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
 		
 	}
 }

@@ -36,6 +36,7 @@ public class AdministratorLogin extends JFrame {
 	private JTable table_1;
 	private JTable table_2;
 	private JTable table_3;
+	MenuInsert menuInsertdialog;
 
 	/**
 	 * Launch the application.
@@ -63,6 +64,8 @@ public class AdministratorLogin extends JFrame {
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		menuInsertdialog = new MenuInsert(this);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -137,7 +140,7 @@ public class AdministratorLogin extends JFrame {
 				int sel = tabbedPane.getSelectedIndex();
 				switch (sel) {
 				case 0 :
-					MenuInsert menuInsertdialog = new MenuInsert();
+//					MenuInsert menuInsertdialog = new MenuInsert();
 					menuInsertdialog.setVisible(true);					
 					break;
 				case 1 :
@@ -251,7 +254,11 @@ public class AdministratorLogin extends JFrame {
 			return;
 		}
 		
+		
+		
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table_2.getModel();
+		
+		defaultTableModel.setNumRows(0);
 				
 		for(MenuDTO menu : MenuList) {
 			

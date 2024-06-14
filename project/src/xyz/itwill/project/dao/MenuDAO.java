@@ -31,13 +31,13 @@ public class MenuDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "insert into menu values(?,?,?,?)";
+			String sql = "insert into menu values(SEQ_MENU.NEXTVAL,?,?,?)";
 			pstmt = con.prepareStatement(sql);			
 			
-			pstmt.setInt(1, menu.getMno());
-			pstmt.setString(2, menu.getValue());
-			pstmt.setInt(3, menu.getMtime());
-			pstmt.setInt(4, menu.getPrice());			
+//			pstmt.setInt(1, menu.getMno());
+			pstmt.setString(1, menu.getValue());
+			pstmt.setInt(2, menu.getMtime());
+			pstmt.setInt(3, menu.getPrice());			
 			
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
