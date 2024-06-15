@@ -19,6 +19,9 @@ import xyz.itwill.project.dao.DesignerDAO;
 import xyz.itwill.project.dao.DesignerDTO;
 import xyz.itwill.project.dao.MenuDAO;
 import xyz.itwill.project.dao.MenuDTO;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class GuestLogin extends JFrame {
 
@@ -31,7 +34,7 @@ public class GuestLogin extends JFrame {
 	public GuestLogin() {
 		setTitle("비회원 로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 515, 570);
+		setBounds(100, 100, 800, 600);
 		setResizable(false);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -40,7 +43,7 @@ public class GuestLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 500, 485);
+		tabbedPane.setBounds(0, 0, 785, 480);
 		contentPane.add(tabbedPane);
 		
 		JScrollPane mScrollPane = new JScrollPane();
@@ -68,9 +71,14 @@ public class GuestLogin extends JFrame {
 		dTable.setEnabled(false);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 490, 500, 31);
+		panel.setBounds(0, 479, 788, 76);
 		contentPane.add(panel);
-		panel.setLayout(null);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{522, 57, 57, 50, 0};
+		gbl_panel.rowHeights = new int[]{5, 23, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
 		JButton btnNewButton = new JButton("닫기");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -78,11 +86,13 @@ public class GuestLogin extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnNewButton.setFont(new Font("굴림", Font.BOLD, 13));
-		btnNewButton.setBounds(393, 3, 95, 24);
-		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("돌아가기");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_1.gridx = 1;
+		gbc_btnNewButton_1.gridy = 1;
+		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
@@ -92,8 +102,13 @@ public class GuestLogin extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("굴림", Font.BOLD, 13));
-		btnNewButton_1.setBounds(295, 3, 95, 24);
-		panel.add(btnNewButton_1);
+		btnNewButton.setFont(new Font("굴림", Font.BOLD, 13));
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton.gridx = 2;
+		gbc_btnNewButton.gridy = 1;
+		panel.add(btnNewButton, gbc_btnNewButton);
 		dTable.getTableHeader().setReorderingAllowed(false);
 		dTable.getTableHeader().setResizingAllowed(false);
 		
