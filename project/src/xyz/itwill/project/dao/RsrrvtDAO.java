@@ -191,7 +191,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		}
 		return rsrrvtList;
 	}
-	public List<RsrrvtDTO> selectRsrrvtbyDnama(String cname) {
+	public List<RsrrvtDTO> selectRsrrvtbyDname(String cname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		

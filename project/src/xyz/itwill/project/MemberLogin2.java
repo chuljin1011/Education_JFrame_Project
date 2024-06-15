@@ -476,7 +476,7 @@ public class MemberLogin2 extends JFrame {
 	}
 
 	public void displayAllRsrrvt() {
-		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyDnama(login_name);
+		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyDname(login_name);
 
 		if (rsrrvtList.isEmpty()) { // 표 초기화 코드 제외
 			return;
