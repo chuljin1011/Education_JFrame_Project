@@ -56,9 +56,9 @@ public class AdministratorLogin extends JFrame {
 	
 	// Update Frame
 	MenuUpdate menuUpdatedialog;
-	DesignerUpdate designerUpdatedialog;
-	MemberUpdate memberUpdatedialog;
-	ReservationUpdate reservationUpdatedialog;
+//	DesignerUpdate designerUpdatedialog;
+//	MemberUpdate memberUpdatedialog;
+//	ReservationUpdate reservationUpdatedialog;
 	
 	// 시술 변경 변수 //
 	int pushMno;
@@ -117,9 +117,9 @@ public class AdministratorLogin extends JFrame {
 		
 		//update Frame
 		menuUpdatedialog = new MenuUpdate(this);
-		designerUpdatedialog = new DesignerUpdate(this);
-		memberUpdatedialog = new MemberUpdate();
-		reservationUpdatedialog = new ReservationUpdate();
+//		designerUpdatedialog = new DesignerUpdate(this);
+//		memberUpdatedialog = new MemberUpdate();
+//		reservationUpdatedialog = new ReservationUpdate();
 				
 		
 		setContentPane(contentPane);
@@ -268,8 +268,8 @@ public class AdministratorLogin extends JFrame {
 					menuUpdatedialog.setVisible(true);
 					break;
 				case 1 :
-					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
-					designerUpdatedialog.setVisible(true);
+//					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
+//					designerUpdatedialog.setVisible(true);
 					break;
 				case 2 :
 					MemberUpdate memberUpdatedialog = new MemberUpdate();
