@@ -25,6 +25,7 @@ public class MemberUpdate extends JDialog {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_8;
 
 	/**
 	 * Launch the application.
@@ -51,7 +52,7 @@ public class MemberUpdate extends JDialog {
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
 		gbl_contentPanel.columnWidths = new int[]{100, 60, 75, 75, 100, 0};
 		gbl_contentPanel.rowHeights = new int[]{23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 23, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
 		{
@@ -142,33 +143,18 @@ public class MemberUpdate extends JDialog {
 			gbc_lblNewLabel_4.gridx = 1;
 			gbc_lblNewLabel_4.gridy = 5;
 			contentPanel.add(lblNewLabel_4, gbc_lblNewLabel_4);
-		}
+		}		
 		{
-			JCheckBox chckbxNewCheckBox = new JCheckBox("남자");
-			GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
-			gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox.gridx = 2;
-			gbc_chckbxNewCheckBox.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
-		
-			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("여자");
-			GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
-			gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox_1.gridx = 3;
-			gbc_chckbxNewCheckBox_1.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
-		
-			chckbxNewCheckBox.addActionListener(e -> {
-				if(chckbxNewCheckBox.isSelected()) {
-	            chckbxNewCheckBox_1.setSelected(false);
-				}
-			});
-	    
-			chckbxNewCheckBox_1.addActionListener(e -> {
-				if(chckbxNewCheckBox_1.isSelected()) {
-					chckbxNewCheckBox.setSelected(false);
-				}
-			});
+			textField_8 = new JTextField();
+			GridBagConstraints gbc_textField_8 = new GridBagConstraints();
+			gbc_textField_8.gridwidth = 2;
+			gbc_textField_8.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_8.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_8.gridx = 2;
+			gbc_textField_8.gridy = 5;
+			contentPanel.add(textField_8, gbc_textField_8);
+			textField_8.setColumns(10);
+		}
 		{
 			JLabel lblNewLabel_5 = new JLabel("핸드폰 번호");
 			GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
@@ -242,7 +228,7 @@ public class MemberUpdate extends JDialog {
 			textField_7 = new JTextField();
 			GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 			gbc_textField_7.gridheight = 2;
-			gbc_textField_7.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_7.insets = new Insets(0, 0, 0, 5);
 			gbc_textField_7.gridwidth = 2;
 			gbc_textField_7.fill = GridBagConstraints.BOTH;
 			gbc_textField_7.gridx = 2;
@@ -292,5 +278,5 @@ public class MemberUpdate extends JDialog {
 		}
 	}
 
-	}
+	
 }

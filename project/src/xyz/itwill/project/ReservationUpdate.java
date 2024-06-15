@@ -20,6 +20,10 @@ public class ReservationUpdate extends JDialog {
 	private JTextField textField_1;
 	private JTextField textField_4;
 	private JTextField textField_6;
+	private JTextField textField;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_5;
 
 	/**
 	 * Launch the application.
@@ -78,13 +82,14 @@ public class ReservationUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 3;
-			contentPanel.add(comboBox, gbc_comboBox);
+			textField = new JTextField();
+			GridBagConstraints gbc_textField = new GridBagConstraints();
+			gbc_textField.insets = new Insets(0, 0, 5, 5);
+			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField.gridx = 2;
+			gbc_textField.gridy = 3;
+			contentPanel.add(textField, gbc_textField);
+			textField.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("예약 디자이너");
@@ -96,13 +101,14 @@ public class ReservationUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 4;
-			contentPanel.add(comboBox, gbc_comboBox);
+			textField_2 = new JTextField();
+			GridBagConstraints gbc_textField_2 = new GridBagConstraints();
+			gbc_textField_2.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_2.gridx = 2;
+			gbc_textField_2.gridy = 4;
+			contentPanel.add(textField_2, gbc_textField_2);
+			textField_2.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_4 = new JLabel("예약 회원");
@@ -133,13 +139,14 @@ public class ReservationUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_5, gbc_lblNewLabel_5);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 6;
-			contentPanel.add(comboBox, gbc_comboBox);
+			textField_3 = new JTextField();
+			GridBagConstraints gbc_textField_3 = new GridBagConstraints();
+			gbc_textField_3.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_3.gridx = 2;
+			gbc_textField_3.gridy = 6;
+			contentPanel.add(textField_3, gbc_textField_3);
+			textField_3.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_7 = new JLabel("현금 여부");
@@ -151,13 +158,14 @@ public class ReservationUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_7, gbc_lblNewLabel_7);
 		}
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 7;
-			contentPanel.add(comboBox, gbc_comboBox);
+			textField_5 = new JTextField();
+			GridBagConstraints gbc_textField_5 = new GridBagConstraints();
+			gbc_textField_5.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_5.gridx = 2;
+			gbc_textField_5.gridy = 7;
+			contentPanel.add(textField_5, gbc_textField_5);
+			textField_5.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_9 = new JLabel("메모");

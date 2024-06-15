@@ -26,6 +26,8 @@ public class DesignerUpdate extends JDialog {
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_3;
+	private JTextField textField_8;
+	private JTextField textField_9;
 
 	/**
 	 * Launch the application.
@@ -136,33 +138,17 @@ public class DesignerUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		}
 		{
-			JCheckBox chckbxNewCheckBox = new JCheckBox("남자");
-			GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
-			gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox.gridx = 2;
-			gbc_chckbxNewCheckBox.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox, gbc_chckbxNewCheckBox);
-		
-			JCheckBox chckbxNewCheckBox_1 = new JCheckBox("여자");
-			GridBagConstraints gbc_chckbxNewCheckBox_1 = new GridBagConstraints();
-			gbc_chckbxNewCheckBox_1.insets = new Insets(0, 0, 5, 5);
-			gbc_chckbxNewCheckBox_1.gridx = 3;
-			gbc_chckbxNewCheckBox_1.gridy = 5;
-			contentPanel.add(chckbxNewCheckBox_1, gbc_chckbxNewCheckBox_1);
-			
-			chckbxNewCheckBox.addActionListener(e -> {
-				if(chckbxNewCheckBox.isSelected()) {
-	            chckbxNewCheckBox_1.setSelected(false);
-				}
-			});
-	    
-			chckbxNewCheckBox_1.addActionListener(e -> {
-				if(chckbxNewCheckBox_1.isSelected()) {
-					chckbxNewCheckBox.setSelected(false);
-				}
-			});
-			
+			textField_8 = new JTextField();
+			GridBagConstraints gbc_textField_8 = new GridBagConstraints();
+			gbc_textField_8.gridwidth = 2;
+			gbc_textField_8.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_8.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_8.gridx = 2;
+			gbc_textField_8.gridy = 5;
+			contentPanel.add(textField_8, gbc_textField_8);
+			textField_8.setColumns(10);
 		}
+		
 		{
 			JLabel lblNewLabel_8 = new JLabel("핸드폰 번호");
 			GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
@@ -191,20 +177,17 @@ public class DesignerUpdate extends JDialog {
 			gbc_lblNewLabel_5.gridx = 1;
 			gbc_lblNewLabel_5.gridy = 7;
 			contentPanel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-		}
+		}		
 		{
-			JComboBox comboBox = new JComboBox();
-			GridBagConstraints gbc_comboBox = new GridBagConstraints();
-			gbc_comboBox.gridwidth = 2;
-			gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-			gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-			gbc_comboBox.gridx = 2;
-			gbc_comboBox.gridy = 7;
-			contentPanel.add(comboBox, gbc_comboBox);
-			String[] items = {"","원장","디자이너"};
-			for (String item : items) {
-			    comboBox.addItem(item);
-			}
+			textField_9 = new JTextField();
+			GridBagConstraints gbc_textField_9 = new GridBagConstraints();
+			gbc_textField_9.gridwidth = 2;
+			gbc_textField_9.insets = new Insets(0, 0, 5, 5);
+			gbc_textField_9.fill = GridBagConstraints.HORIZONTAL;
+			gbc_textField_9.gridx = 2;
+			gbc_textField_9.gridy = 7;
+			contentPanel.add(textField_9, gbc_textField_9);
+			textField_9.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_6 = new JLabel("급여");

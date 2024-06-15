@@ -19,7 +19,6 @@ public class MenuUpdate extends JDialog {
 	private JTextField mpricetextField;
 	private JTextField mvaluetextField;
 	private JTextField mtimetextField;
-	private JTextField mnotextField;
 
 	// 시술 변경 변수 //
 	int pushMno;
@@ -46,25 +45,6 @@ public class MenuUpdate extends JDialog {
 		this.pushPrice = administratorLogin.pushPrice;
 
 		contentPanel.setLayout(gbl_contentPanel);
-		{
-			JLabel lblNewLabel = new JLabel("시술 번호");
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-			gbc_lblNewLabel.gridx = 1;
-			gbc_lblNewLabel.gridy = 1;
-			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
-		}
-		{
-			mnotextField = new JTextField();
-			GridBagConstraints gbc_mnotextField = new GridBagConstraints();
-			gbc_mnotextField.insets = new Insets(0, 0, 5, 5);
-			gbc_mnotextField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_mnotextField.gridx = 2;
-			gbc_mnotextField.gridy = 1;
-			contentPanel.add(mnotextField, gbc_mnotextField);
-			mnotextField.setColumns(10);
-		}
 		{
 			JLabel lblNewLabel_3 = new JLabel("시술 종류");
 			GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
@@ -164,8 +144,7 @@ public class MenuUpdate extends JDialog {
 			}
 		}
 
-		if (pushMno != 0) {
-			mnotextField.setText(String.valueOf(pushMno));
+		if (pushMno != 0) {			
 			mvaluetextField.setText(String.valueOf(pushValue));
 			mtimetextField.setText(String.valueOf(pushMtime));
 			mpricetextField.setText(String.valueOf(pushPrice));
