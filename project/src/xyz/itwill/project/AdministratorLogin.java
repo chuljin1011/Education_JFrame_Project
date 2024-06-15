@@ -174,7 +174,7 @@ public class AdministratorLogin extends JFrame {
                 new String[] {"아이디","비밀번호","생년월일","이름","성별","핸드폰번호","직급","급여","고용일","경력"}));
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);
-		table.getColumnModel().getColumn(5).setPreferredWidth(150); // 핸드폰번호
+		table.getColumnModel().getColumn(5).setPreferredWidth(150); 
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		tabbedPane.addTab("회원 관리", null, scrollPane_1, null);
@@ -373,8 +373,8 @@ public class AdministratorLogin extends JFrame {
 	                case 3:
 	                	int selectedRsrrvtRow = table_3.getSelectedRow();
 	                    if (selectedRsrrvtRow != -1) {
-	                    	String rdate = (String) table_3.getValueAt(selectedRsrrvtRow, 0);
-	                        removeRsrrvt(rdate);
+	                    	int rno= (int) table_3.getValueAt(selectedRsrrvtRow, 0);
+	                        removeRsrrvt(rno);
 	                    } else {
 	                        JOptionPane.showMessageDialog(null, "삭제할 예약을 선택해주세요.");
 	                    }
@@ -536,7 +536,8 @@ public class AdministratorLogin extends JFrame {
 		}
 	}
 	//디자이너와 회원은 삭제되고 바로 표에서 사라집니다
-	//그런데 시술은 화면에서 바로 안사라지고 다시켜야 없어져 있고, 예약은 다시키면 랜덤으로 전부 삭제되거나 몇개가 한번에 삭제돼요ㅠ  
+	//그런데 시술은 화면에서 바로 안사라지고 다시켜야 없어져 있고, 
+	//예약은 표에는 있는데 삭제할 날짜의 예약 정보를 찾을 수 없습니다.라고 떠요ㅠㅠ
 	public void removeMenu(int mno) {
 		int rows=MenuDAO.getDAO().deleteMenu(mno);
         	
@@ -577,8 +578,8 @@ public class AdministratorLogin extends JFrame {
 			JOptionPane.showMessageDialog(null, "삭제할 아이디의 회원 정보를 찾을 수 없습니다.");
 		}
 	}
-	public void removeRsrrvt(String rdate) {
-		int rows=RsrrvtDAO.get_dao().deleteRsrrvt(rdate);
+	public void removeRsrrvt(int rno) {
+		int rows=RsrrvtDAO.get_dao().deleteRsrrvt(rno);
         	
 		if(rows > 0) {
 			JOptionPane.showMessageDialog(null, rows+"개의 예약 정보를 삭제 하였습니다.");

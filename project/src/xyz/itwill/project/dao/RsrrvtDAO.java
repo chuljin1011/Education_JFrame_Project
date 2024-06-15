@@ -85,7 +85,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		return rows;
 	}
 	//삭제가 없길래 제가 만들었는데 확인부탁드려요
-	public int deleteRsrrvt(String rdate) {
+	public int deleteRsrrvt(int rno) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -93,10 +93,10 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "delete from member where rdate=?";
+			String sql = "delete from member where rno=?";
 			pstmt = con.prepareStatement(sql);
 
-			pstmt.setString(1, rdate);
+			pstmt.setInt(1, rno);
 
 			rows = pstmt.executeUpdate();
 		} catch (SQLException e) {
