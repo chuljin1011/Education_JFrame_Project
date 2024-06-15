@@ -16,8 +16,7 @@ import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 import javax.swing.JTextField;
 
 public class MenuInsert extends JDialog {
@@ -27,7 +26,6 @@ public class MenuInsert extends JDialog {
 	private JTextField priceTF;
 	private JTextField valueTF;
 	private JTextField mtimeTF;
-	private JTextField mnoTF;
 	
 //	JTextField mnoTF,valueTF,mtimeTF,priceTF;
 	/**
@@ -150,14 +148,7 @@ public class MenuInsert extends JDialog {
 			{
 			}
 			{
-				JButton okButton = new JButton("등록");
-				okButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {	
-						addMenu();
-						administratorLogin.displayAllMenu();
-//						dispose();
-					}
-				});
+				JButton okButton = new JButton("등록");				
 				okButton.setActionCommand("OK");
 				GridBagConstraints gbc_okButton = new GridBagConstraints();
 				gbc_okButton.anchor = GridBagConstraints.NORTH;
@@ -167,15 +158,13 @@ public class MenuInsert extends JDialog {
 				buttonPane.add(okButton, gbc_okButton);
 				getRootPane().setDefaultButton(okButton);
 				
-//				okButton.addActionListener(e -> {
+				okButton.addActionListener(e -> {
+					 addMenu();
+					 administratorLogin.displayAllMenu();
 //					 dispose();
-//				});
+				});
 			}
 			JButton cancelButton = new JButton("취소");
-			cancelButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			cancelButton.setActionCommand("Cancel");
 			GridBagConstraints gbc_cancelButton = new GridBagConstraints();
 			gbc_cancelButton.insets = new Insets(0, 0, 5, 0);
