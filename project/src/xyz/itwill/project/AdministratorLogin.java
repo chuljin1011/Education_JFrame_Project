@@ -535,7 +535,8 @@ public class AdministratorLogin extends JFrame {
 
 		}
 	}
-	//디자이너, 회원은 삭제되고 바로 표에서 사라지는데 시술이랑 예약쪽은 안돼요... 
+	//디자이너와 회원은 삭제되고 바로 표에서 사라집니다
+	//그런데 시술은 화면에서 바로 안사라지고 다시켜야 없어져 있고, 예약은 다시키면 랜덤으로 전부 삭제되거나 몇개가 한번에 삭제돼요ㅠ  
 	public void removeMenu(int mno) {
 		int rows=MenuDAO.getDAO().deleteMenu(mno);
         	
