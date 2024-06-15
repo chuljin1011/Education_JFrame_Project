@@ -6,10 +6,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import xyz.itwill.project.dao.MenuDAO;
+import xyz.itwill.project.dao.MenuDTO;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class MenuUpdate extends JDialog {
@@ -56,7 +61,7 @@ public class MenuUpdate extends JDialog {
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
 		{
-			textField = new JTextField();
+			mnotextField = new JTextField();
 			GridBagConstraints gbc_textField = new GridBagConstraints();
 			gbc_textField.insets = new Insets(0, 0, 5, 5);
 			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
@@ -170,10 +175,58 @@ public class MenuUpdate extends JDialog {
 			mtimetextField.setText(String.valueOf(pushMtime));
 			mpricetextField.setText(String.valueOf(pushPrice));
 		}
+	}
+		
+		public void modifyMenu() {		
+			
+			String value=mvaluetextField.getText();
+			
+			if(value.equals("")) {
+				JOptionPane.showMessageDialog(this, "시술 종류를 수정해 주세요.");
+				mvaluetextField.requestFocus();
+				return;
+			}
+			
+			String mtimeString=mvaluetextField.getText();
+			
+			if(mtimeString.equals("")) {
+				JOptionPane.showMessageDialog(this, "시술 시간을 수정해 주세요.");
+				mvaluetextField.requestFocus();
+				return;
+			}
+	
+			int mtime=Integer.parseInt(mtimeString);
+			
+			String priceString=mpricetextField.getText();
+			
+			if(priceString.equals("")) {
+				JOptionPane.showMessageDialog(this, "시술 가격을 수정해 주세요.");
+				mpricetextField.requestFocus();
+				return;
+			}
+	
+			int price=Integer.parseInt(priceString);
+			
+			MenuDTO menu=new MenuDTO();			
+			menu.setValue(value);
+			menu.setMtime(mtime);
+			menu.setPrice(price);
+			
+			int rows=MenuDAO.getDAO().updateMenu(menu);
+			
+			if (rows > 0) {
+			JOptionPane.showMessageDialog(this, rows+"개의 시술을 삽입하여 수정 하였습니다.");
+			dispose();
+			
+			} else {
+				JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+			}		
+			
+		
+		}
 
 //		this.pushValue = administratorLogin.pushValue;
 //		this.pushMtime = administratorLogin.pushMtime;
 //		this.pushPrice = administratorLogin.pushPrice;	
-	}
 
 }

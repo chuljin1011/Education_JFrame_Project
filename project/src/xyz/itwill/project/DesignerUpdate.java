@@ -11,8 +11,6 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 
 public class DesignerUpdate extends JDialog {
 

@@ -57,7 +57,8 @@ public class AdministratorLogin extends JFrame {
 	// Update Frame
 	MenuUpdate menuUpdatedialog;
 	DesignerUpdate designerUpdatedialog;
-	
+	MemberUpdate memberUpdatedialog;
+	ReservationUpdate reservationUpdatedialog;
 	
 	// 시술 변경 변수 //
 	int pushMno;
@@ -114,11 +115,12 @@ public class AdministratorLogin extends JFrame {
 		memberInsertdialog =new MemberInsert(this);
 		reservationInsertdialog = new ReservationInsert(this);
 		
-		
-		
-		
-		
-		
+		//update Frame
+		menuUpdatedialog = new MenuUpdate(this);
+		designerUpdatedialog = new DesignerUpdate(this);
+		memberUpdatedialog = new MemberUpdate();
+		reservationUpdatedialog = new ReservationUpdate();
+				
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -158,7 +160,6 @@ public class AdministratorLogin extends JFrame {
 				}
 			}
 		});
-		
 		
 		
 		
@@ -389,9 +390,8 @@ public class AdministratorLogin extends JFrame {
 		displayAllDesigner();
 		displayAllmember();	
 		displayAllRsrrvt();
-	}	
+	}		
 	
-	//검색은 변경한 걸로는 다 되는거 같아요.근데 1을 검색하면 10도 같이 떠요...
 	private void performTableSearch(DefaultTableModel tableModel, String searchText, int columnIndex) {
 	    if (searchText.trim().isEmpty()) {
 	        JOptionPane.showMessageDialog(this, "검색 정보를 입력해 주세요.");
@@ -536,9 +536,7 @@ public class AdministratorLogin extends JFrame {
 
 		}
 	}
-	//디자이너와 회원은 삭제되고 바로 표에서 사라집니다
-	//그런데 시술은 화면에서 바로 안사라지고 다시켜야 없어져 있고, 
-	//예약은 삭제할 날짜의 예약 정보를 찾을 수 없습니다.라고 떠요ㅠㅠ
+	
 	public void removeMenu(int mno) {
 		int rows=MenuDAO.getDAO().deleteMenu(mno);
         	
