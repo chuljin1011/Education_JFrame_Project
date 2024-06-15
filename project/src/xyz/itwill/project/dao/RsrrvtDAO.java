@@ -84,6 +84,28 @@ public class RsrrvtDAO extends JdbcDAO {
 		}
 		return rows;
 	}
+	//삭제가 없길래 제가 만들었는데 확인부탁드려요
+	public int deleteRsrrvt(String rdate) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		int rows = 0;
+		try {
+			con = getConnection();
+
+			String sql = "delete from member where rdate=?";
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, rdate);
+
+			rows = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]deleteRsrrvt() 메소드의 SQL 오류 = " + e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}	
 
 	// 단일 검색 _ rno
 	public RsrrvtDTO selectRsrrvtbyRno(int rno) {
