@@ -58,6 +58,7 @@ public class MenuInsert extends JDialog {
 		gbl_contentPanel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
+/*
 		{
 			JLabel lblNewLabel = new JLabel("시술 번호");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -78,6 +79,8 @@ public class MenuInsert extends JDialog {
 			contentPanel.add(mnoTF, gbc_mnoTF);
 			mnoTF.setColumns(10);
 		}
+*/
+		
 		{
 			JLabel lblNewLabel_1 = new JLabel("시술 종류");
 			GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();

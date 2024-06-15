@@ -20,7 +20,6 @@ import xyz.itwill.project.dao.MenuDTO;
 import xyz.itwill.project.dao.RsrrvtDAO;
 import xyz.itwill.project.dao.RsrrvtDTO;
 
-
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -33,6 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
+
+
 import javax.swing.JTextField;
 import javax.swing.RowFilter;
 import javax.swing.JLabel;
@@ -236,6 +237,7 @@ public class AdministratorLogin extends JFrame {
 		            default:		               
 		                break;
 		        }
+		        textField.setText("");
 		    }
 		});		
 		
@@ -388,33 +390,42 @@ public class AdministratorLogin extends JFrame {
 		displayAllmember();	
 		displayAllRsrrvt();
 	}	
-	//검색은 일단 바뀐걸로는 다 되는거 같아요
+	
+	//검색은 변경한 걸로는 다 되는거 같아요
 	private void performTableSearch(DefaultTableModel tableModel, String searchText, int columnIndex) {
-	    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
-	    
 	    if (searchText.trim().isEmpty()) {
-	        sorter.setRowFilter(null); 
-	    } else {
-	        try {
-	            sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + searchText + ".*", columnIndex));
-	        } catch (java.util.regex.PatternSyntaxException e) {
-	            e.printStackTrace();
-	            sorter.setRowFilter(null); 
-	        }
+	        JOptionPane.showMessageDialog(this, "검색 정보를 입력해 주세요.");
+	        textField.requestFocus();
+	        return;
 	    }
-	    
-	    if (tableModel == mTable.getModel()) {
-	        mTable.setRowSorter(sorter);
-	    } else if (tableModel == table.getModel()) {
-	        table.setRowSorter(sorter);
-	    } else if (tableModel == table_1.getModel()) {
-	        table_1.setRowSorter(sorter);
-	    } else if (tableModel == table_3.getModel()) {
-	        table_3.setRowSorter(sorter);
+
+	    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+
+	    try {
+	        sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + searchText + ".*", columnIndex));
+	        if (tableModel == mTable.getModel()) {
+	            mTable.setRowSorter(sorter);
+	        } else if (tableModel == table.getModel()) {
+	            table.setRowSorter(sorter);
+	        } else if (tableModel == table_1.getModel()) {
+	            table_1.setRowSorter(sorter);
+	        } else if (tableModel == table_3.getModel()) {
+	            table_3.setRowSorter(sorter);
+	        }
+	        
+	        JOptionPane.showMessageDialog(this, "검색을 완료했습니다.");
+
+	    } catch (java.util.regex.PatternSyntaxException e) {
+	        e.printStackTrace();
+	        JOptionPane.showMessageDialog(this, "유효하지 않은 검색어입니다.");
+	        textField.requestFocus();
+	    }
+	   
+	    if (sorter.getViewRowCount() == 0) {
+	        JOptionPane.showMessageDialog(this, "검색 결과가 없습니다.");
 	    }
 	}
-
-	
+		
 	public void displayAllMenu() {
 		List<MenuDTO> MenuList=MenuDAO.getDAO().selectMenuAll();
 		if(MenuList.isEmpty()) {
