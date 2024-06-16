@@ -284,7 +284,7 @@ public class ReservationInsert extends JDialog {
 					
 					okButton.addActionListener(e -> {
 						addRsrrvt();
-						administratorLogin.displayAllDesigner();
+						administratorLogin.displayAllRsrrvt();
 						
 					});
 				}
