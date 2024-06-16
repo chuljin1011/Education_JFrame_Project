@@ -371,11 +371,6 @@ public class MemberInsert extends JDialog {
 		if (rows > 0) {
 		JOptionPane.showMessageDialog(this, rows+"명의 회원을 삽입하여 저장 하였습니다.");
 		dispose();
-		
-		} else {
-		JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
-		}		
-		
 		// TF 초기화
 		idTF.setText("");
 		pwTF.setText("");
@@ -386,6 +381,12 @@ public class MemberInsert extends JDialog {
 		join_dateTF.setText("");
 		used_countTF.setText("");
 		memoTF.setText("");
+		
+		} else {
+		JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
+		
+
 		
 	}
 }

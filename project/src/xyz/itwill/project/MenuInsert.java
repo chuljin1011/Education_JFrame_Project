@@ -262,15 +262,16 @@ public class MenuInsert extends JDialog {
 		if (rows > 0) {
 		JOptionPane.showMessageDialog(this, rows+"개의 시술을 삽입하여 저장 하였습니다.");
 		dispose();
+		// TF 초기화
+		valueTF.setText("");
+		mtimeTF.setText("");
+		priceTF.setText("");
 		
 		} else {
 			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
 		}		
 		
-		// TF 초기화
-		valueTF.setText("");
-		mtimeTF.setText("");
-		priceTF.setText("");
+
 		
 		
 	}

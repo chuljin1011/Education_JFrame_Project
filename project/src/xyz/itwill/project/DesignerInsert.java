@@ -397,11 +397,6 @@ public class DesignerInsert extends JDialog {
 		if (rows > 0) {
 		JOptionPane.showMessageDialog(this, rows+"명의 디자이너를 삽입하여 저장 하였습니다.");
 		dispose();
-		
-		} else {
-			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
-		}		
-		
 		// TF 초기화
 		idTF.setText("");
 		pwTF.setText("");
@@ -413,6 +408,12 @@ public class DesignerInsert extends JDialog {
 		salTF.setText("");
 		hire_dateTF.setText("");
 		careerTF.setText("");
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
+		
+
 						
 		
 		

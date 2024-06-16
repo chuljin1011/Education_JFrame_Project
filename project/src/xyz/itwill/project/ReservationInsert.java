@@ -376,11 +376,6 @@ public class ReservationInsert extends JDialog {
 		if (rows > 0) {
 		JOptionPane.showMessageDialog(this, rows+"개의 예약을 삽입하여 저장 하였습니다.");
 		dispose();
-		
-		} else {
-			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
-		}		
-		
 		// TF 초기화
 		rdateTF.setText("");
 		rtimeTF.setText("");
@@ -391,6 +386,11 @@ public class ReservationInsert extends JDialog {
 		memoTF.setText("");
 		statusTF.setText("");
 		paymentTF.setText("");
+		
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}		
+		
 		
 		
 		
