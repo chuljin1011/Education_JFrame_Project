@@ -84,23 +84,23 @@ public class AdministratorLogin extends JFrame {
 	private JLabel lblNewLabel;
 	private JTabbedPane tabbedPane;
 	 
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdministratorLogin frame = new AdministratorLogin();
-					frame.setVisible(true);
-					} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
+//	
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AdministratorLogin frame = new AdministratorLogin();
+//					frame.setVisible(true);
+//					} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
+//	
 	/**
 	 * Create the frame.
 	 */
