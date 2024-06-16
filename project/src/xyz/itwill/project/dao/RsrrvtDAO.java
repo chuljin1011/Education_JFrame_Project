@@ -93,7 +93,7 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "delete from member where rno=?";
+			String sql = "delete from rsrrvt where rno=?";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setInt(1, rno);

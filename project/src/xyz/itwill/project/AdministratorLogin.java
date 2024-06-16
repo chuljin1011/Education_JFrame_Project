@@ -170,7 +170,7 @@ public class AdministratorLogin extends JFrame {
 		tabbedPane.addTab("디자이너 관리", null, scrollPane, null);
 		
 		table = new JTable();
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"아이디","비밀번호","생년월일","이름","성별","핸드폰번호","직급","급여","고용일","경력"}));
@@ -599,6 +599,7 @@ public class AdministratorLogin extends JFrame {
 		}
 	}
 	public void removeRsrrvt(int rno) {
+//		System.out.println(rno);
 		int rows=RsrrvtDAO.get_dao().deleteRsrrvt(rno);
         	
 		if(rows > 0) {

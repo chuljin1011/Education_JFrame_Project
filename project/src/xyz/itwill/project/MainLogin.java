@@ -232,8 +232,8 @@ public class MainLogin extends JFrame {
 		        	login_name = designer.getName();        
 		        	if(designer.getPw().equals(pwField.getText())) {
 
-//			        	AdministratorLogin administratorLogin = new AdministratorLogin();
-//			        	administratorLogin.setVisible(true);
+			        	AdministratorLogin administratorLogin = new AdministratorLogin();
+			        	administratorLogin.setVisible(true);
 		        		setVisible(false);
 
 		        		
