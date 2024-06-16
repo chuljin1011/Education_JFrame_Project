@@ -143,6 +143,7 @@ public class AdministratorLogin extends JFrame {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
+					if (mTable.getSelectedRow() >= 0) {
 					int selectedRow = mTable.getSelectedRow();
 
 						Integer mno = (Integer) (mTable.getValueAt(selectedRow, 0));
@@ -154,18 +155,12 @@ public class AdministratorLogin extends JFrame {
 						pushValue = value;
 						pushMtime = mtime;
 						pushPrice = price;
-						
-						
-
-					
+					}
 				}
 			}
 		});
-		
-		
-		
-		
-		
+	
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("디자이너 관리", null, scrollPane, null);
@@ -569,8 +564,9 @@ public class AdministratorLogin extends JFrame {
 		if(rows > 0) {
 			JOptionPane.showMessageDialog(null, rows+"개의 메뉴 정보를 삭제 하였습니다.");
 			DefaultTableModel defaultTableModel=(DefaultTableModel)mTable.getModel();
-			defaultTableModel.setNumRows(0);	
+			defaultTableModel.setNumRows(0);
 			displayAllMenu();
+
 			
 		} else {
 			JOptionPane.showMessageDialog(null, "삭제할 번호의 메뉴 정보를 찾을 수 없습니다.");
