@@ -56,6 +56,7 @@ public class MemberLogin2 extends JFrame {
 	private JComboBox mcomboBox;
 	private JComboBox dcomboBox;
 	private boolean getDate_Status;
+	private String rdName;
 	
 	private String final_Rdate;		
 	private int final_Rtime;
@@ -76,30 +77,30 @@ public class MemberLogin2 extends JFrame {
 	
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			MemberLogin2 dialog = new MemberLogin2();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		try {
+//			MemberLogin2 dialog = new MemberLogin2();
+//			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+//			dialog.setVisible(true);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Create the dialog.
 	 */
-	public MemberLogin2() {
+	public MemberLogin2(String login_id, String login_name) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 680, 734);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		login_id = "oao";
-		login_name = "김수지";		
+		this.login_id = login_id;
+		this.login_name = login_name;	
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -218,6 +219,7 @@ public class MemberLogin2 extends JFrame {
 		contentPane.add(lblNewLabel);
 
 		JButton getDateButton = new JButton("날짜 조회");
+		getDateButton.setEnabled(false);
 		getDateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object getYear = ycomboBox.getSelectedItem();
@@ -225,7 +227,7 @@ public class MemberLogin2 extends JFrame {
 				Object getDay = dcomboBox.getSelectedItem();
 				get_date = getYear + "-" + getMonth + "-" + getDay;
 
-				getRdateRsrrvtData(get_date);
+				getRdateRsrrvtData(get_date, rdName);
 				
 				getDate_Status = true;
 
@@ -247,10 +249,20 @@ public class MemberLogin2 extends JFrame {
 		contentPane.add(mscrollPane);
 
 		mTable = new JTable();
+		mTable.setEnabled(false);
 		mscrollPane.setViewportView(mTable);
 		mTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "메뉴 번호","종류", "시술 시간", "가격" }));
 		mTable.getTableHeader().setReorderingAllowed(false);
 		mTable.getTableHeader().setResizingAllowed(false);
+		mTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				getDateButton.setEnabled(true);
+				
+			}
+		});
+		
 
 		// 메뉴 테이블 불러오기
 		DisplayAllMenu();
@@ -286,6 +298,14 @@ public class MemberLogin2 extends JFrame {
 		dTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "이름", "직급", "경력" }));
 		dTable.getTableHeader().setReorderingAllowed(false);
 		dTable.getTableHeader().setResizingAllowed(false);
+		dTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				mTable.setEnabled(true);
+				
+			}
+		});
 
 		// 디자이너 테이블 불러오기
 		DisplayAllDsigner();
@@ -302,6 +322,7 @@ public class MemberLogin2 extends JFrame {
 						String rank = (String) (dTable.getValueAt(selectedRow, 1));
 
 						select_dName.setText(name);
+						rdName = name;
 						
 						final_Rdname = name;
 						get_Rank = rank;
@@ -505,8 +526,8 @@ public class MemberLogin2 extends JFrame {
 
 	}
 
-	public void getRdateRsrrvtData(String rdate) {
-		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyRdate(rdate);
+	public void getRdateRsrrvtData(String rdate, String rdname) {
+		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyRdate(rdate, rdname);
 		
 		
 		for (int i = openTime-buttonTimeMin; i <= (23-closeTime)+(openTime-1); i++) {

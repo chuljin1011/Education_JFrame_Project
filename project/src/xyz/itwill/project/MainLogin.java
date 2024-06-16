@@ -30,7 +30,7 @@ public class MainLogin extends JFrame {
 	private JCheckBox chckbxMember;
 	private JCheckBox chckbxAdmin;
 	private JButton btnNewButton_2;
-	private MemberLogin memberLogin;
+	private MemberLogin2 memberLogin;
 	String login_id;
 	String login_name;
 	
@@ -209,7 +209,7 @@ public class MainLogin extends JFrame {
 		        	
 		        	login_name = customr.getName();        
 		        	if(customr.getPw().equals(pwField.getText())) {
-		        		memberLogin = new MemberLogin(login_id, login_name);
+		        		memberLogin = new MemberLogin2(login_id, login_name);
 		        		memberLogin.setVisible(true);
 		        		setVisible(false);
 		        		

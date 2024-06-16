@@ -1,42 +1,42 @@
 package xyz.itwill.project;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-
-import xyz.itwill.project.dao.MemberDAO;
-import xyz.itwill.project.dao.MemberDTO;
-import xyz.itwill.project.dao.DesignerDAO;
-import xyz.itwill.project.dao.DesignerDTO;
-import xyz.itwill.project.dao.MenuDAO;
-import xyz.itwill.project.dao.MenuDTO;
-import xyz.itwill.project.dao.RsrrvtDAO;
-import xyz.itwill.project.dao.RsrrvtDTO;
-
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JButton;
-
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 
-
-import javax.swing.JTextField;
-import javax.swing.RowFilter;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+import xyz.itwill.project.dao.DesignerDAO;
+import xyz.itwill.project.dao.DesignerDTO;
+import xyz.itwill.project.dao.MemberDAO;
+import xyz.itwill.project.dao.MemberDTO;
+import xyz.itwill.project.dao.MenuDAO;
+import xyz.itwill.project.dao.MenuDTO;
+import xyz.itwill.project.dao.RsrrvtDAO;
+import xyz.itwill.project.dao.RsrrvtDTO;
+import javax.swing.SwingConstants;
 
 
 public class AdministratorLogin extends JFrame {
@@ -81,6 +81,8 @@ public class AdministratorLogin extends JFrame {
 	 
 	
 	TableRowSorter<DefaultTableModel> sorter;
+	private JLabel lblNewLabel;
+	private JTabbedPane tabbedPane;
 	 
 	
 	/**
@@ -126,14 +128,16 @@ public class AdministratorLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(0, 0, 785, 480);
 		contentPane.add(tabbedPane);
+
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		tabbedPane.addTab("시술 관리", null, scrollPane_2, null);
 		
 		mTable = new JTable();
+		mTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_2.setViewportView(mTable);
 		mTable.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"번호","종류","시간","가격"}));
@@ -166,6 +170,7 @@ public class AdministratorLogin extends JFrame {
 		tabbedPane.addTab("디자이너 관리", null, scrollPane, null);
 		
 		table = new JTable();
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"아이디","비밀번호","생년월일","이름","성별","핸드폰번호","직급","급여","고용일","경력"}));
@@ -177,6 +182,7 @@ public class AdministratorLogin extends JFrame {
 		tabbedPane.addTab("회원 관리", null, scrollPane_1, null);
 		
 		table_1 = new JTable();
+		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_1.setViewportView(table_1);
 		table_1.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"아이디","비밀번호","생년월일","이름","성별","핸드폰번호","가입일","이용횟수","메모"}));
@@ -189,6 +195,7 @@ public class AdministratorLogin extends JFrame {
 		tabbedPane.addTab("예약 관리", null, scrollPane_3, null);
 				
 		table_3 = new JTable();
+		table_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane_3.setViewportView(table_3);
 		table_3.setModel(new DefaultTableModel(new Object[][] {},
                 new String[] {"번호","날짜","시간","디자이너","회원","시술","결제금액","현금여부","예약상태","메모"}));
@@ -199,89 +206,69 @@ public class AdministratorLogin extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 481, 780, 80);
 		contentPane.add(panel);
-		
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{50, 150, 57, 200, 57, 57, 57, 50, 0};
-		gbl_panel.rowHeights = new int[]{5, 23, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		JButton btnNewButton_2 = new JButton("검색");
-	
-		btnNewButton_2.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        int sel = tabbedPane.getSelectedIndex();
-		        String searchText = textField.getText().trim(); 
-		        
-		        switch (sel) {
-		            case 0:
-		                DefaultTableModel menuTableModel = (DefaultTableModel) mTable.getModel();
-		                performTableSearch(menuTableModel, searchText,0);
-		                break;
-		            case 1:		                
-		                DefaultTableModel designerTableModel = (DefaultTableModel) table.getModel();
-		                performTableSearch(designerTableModel, searchText,0);
-		                break;
-		            case 2:		               
-		                DefaultTableModel memberTableModel = (DefaultTableModel) table_1.getModel();
-		                performTableSearch(memberTableModel, searchText,0);
-		                break;
-		            case 3:		              
-		                DefaultTableModel reservationTableModel = (DefaultTableModel) table_3.getModel();
-		                performTableSearch(reservationTableModel, searchText,0);
-		                break;
-		            default:		               
-		                break;
-		        }
-		        textField.setText("");
-		    }
-		});		
-		
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.BOTH;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 1;
-		panel.add(textField, gbc_textField);
-		textField.setColumns(10);
+				panel.setLayout(null);
 				
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2.gridx = 2;
-		gbc_btnNewButton_2.gridy = 1;
-		panel.add(btnNewButton_2, gbc_btnNewButton_2);
+				lblNewLabel = new JLabel("시술번호 : ");
+				lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+				lblNewLabel.setBounds(12, 30, 75, 15);
+				panel.add(lblNewLabel);
 				
-		JButton btnNewButton_3 = new JButton("수정");
+				textField = new JTextField();
+				textField.setBounds(88, 26, 217, 23);
+				panel.add(textField);
+				textField.setColumns(10);
+			
+			JButton btnNewButton_2 = new JButton("검색");
+			btnNewButton_2.setBounds(309, 26, 69, 23);
+			
+				btnNewButton_2.addActionListener(new ActionListener() {
+				    public void actionPerformed(ActionEvent e) {
+				        int sel = tabbedPane.getSelectedIndex();
+				        String searchText = textField.getText().trim(); 
+				        
+				        switch (sel) {
+				            case 0:
+				                DefaultTableModel menuTableModel = (DefaultTableModel) mTable.getModel();
+				                performTableSearch(menuTableModel, searchText,0);
+				                break;
+				            case 1:		                
+				                DefaultTableModel designerTableModel = (DefaultTableModel) table.getModel();
+				                performTableSearch(designerTableModel, searchText,0);
+				                break;
+				            case 2:		               
+				                DefaultTableModel memberTableModel = (DefaultTableModel) table_1.getModel();
+				                performTableSearch(memberTableModel, searchText,0);
+				                break;
+				            case 3:		              
+				                DefaultTableModel reservationTableModel = (DefaultTableModel) table_3.getModel();
+				                performTableSearch(reservationTableModel, searchText,0);
+				                break;
+				            default:		               
+				                break;
+				        }
+				        textField.setText("");
+				    }
+				});
+				panel.add(btnNewButton_2);
 		
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnNewButton_2_1 = new JButton("초기화");
+		btnNewButton_2_1.setBounds(380, 26, 91, 23);
+		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int sel = tabbedPane.getSelectedIndex();
-				switch (sel) {
-				case 0 :
-					menuUpdatedialog = new MenuUpdate(AdministratorLogin.this);
-					menuUpdatedialog.setVisible(true);
-					break;
-				case 1 :
-					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
-					designerUpdatedialog.setVisible(true);
-					break;
-				case 2 :
-					MemberUpdate memberUpdatedialog = new MemberUpdate();
-					memberUpdatedialog.setVisible(true);
-					break;
-				case 3 :
-					ReservationUpdate reservationUpdatedialog = new ReservationUpdate();
-					reservationUpdatedialog.setVisible(true);
-					break;
-				default:						
-					break;
-				}
+				
+				sorter.setRowFilter(null);
+//				displayAllMenu();
+//				displayAllDesigner();
+//				displayAllmember();	
+//				displayAllRsrrvt();
+				
+				
 			}
 		});
+		panel.add(btnNewButton_2_1);
 		
 		JButton btnNewButton = new JButton("등록");
+		btnNewButton.setBounds(536, 26, 70, 23);
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -308,53 +295,41 @@ public class AdministratorLogin extends JFrame {
 				}
 			}
 		});
+		panel.add(btnNewButton);
 		
-		JButton btnNewButton_2_1 = new JButton("초기화");
-		btnNewButton_2_1.addActionListener(new ActionListener() {
+		JButton btnNewButton_3 = new JButton("수정");
+		btnNewButton_3.setBounds(612, 26, 70, 23);
+		
+		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				sorter.setRowFilter(null);
-//				displayAllMenu();
-//				displayAllDesigner();
-//				displayAllmember();	
-//				displayAllRsrrvt();
-				
-				
+				int sel = tabbedPane.getSelectedIndex();
+				switch (sel) {
+				case 0 :
+					menuUpdatedialog = new MenuUpdate(AdministratorLogin.this);
+					menuUpdatedialog.setVisible(true);
+					break;
+				case 1 :
+					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
+					designerUpdatedialog.setVisible(true);
+					break;
+				case 2 :
+					MemberUpdate memberUpdatedialog = new MemberUpdate();
+					memberUpdatedialog.setVisible(true);
+					break;
+				case 3 :
+					ReservationUpdate reservationUpdatedialog = new ReservationUpdate();
+					reservationUpdatedialog.setVisible(true);
+					break;
+				default:						
+					break;
+				}
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
-		gbc_btnNewButton_2_1.anchor = GridBagConstraints.WEST;
-		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_2_1.gridx = 3;
-		gbc_btnNewButton_2_1.gridy = 1;
-		panel.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
+		panel.add(btnNewButton_3);
 		
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 1;
-		panel.add(btnNewButton, gbc_btnNewButton);
-				
-		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_3.gridx = 5;
-		gbc_btnNewButton_3.gridy = 1;
-		panel.add(btnNewButton_3, gbc_btnNewButton_3);
-						
 		JButton btnNewButton_1 = new JButton("삭제");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_1.gridx = 6;
-		gbc_btnNewButton_1.gridy = 1;
-		panel.add(btnNewButton_1, gbc_btnNewButton_1);
-		
-		JLabel lblNewLabel = new JLabel("(번호나 아이디를 입력하세요)");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.NORTH;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 2;
-		panel.add(lblNewLabel, gbc_lblNewLabel);
+		btnNewButton_1.setBounds(687, 26, 70, 23);
+		panel.add(btnNewButton_1);
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -401,6 +376,30 @@ public class AdministratorLogin extends JFrame {
 	            }
 	        }
 		});		
+		
+		tabbedPane.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				switch (tabbedPane.getSelectedIndex()) {
+				case 0:
+					lblNewLabel.setText("시술번호 : ");
+					break;
+				case 1:
+					lblNewLabel.setText("디자이너 ID : ");
+					break;
+				case 2:
+					lblNewLabel.setText("고객 ID : ");
+					break;
+				case 3:
+					lblNewLabel.setText("예약번호 : ");
+					break;
+					
+				
+				}
+				
+			}
+		});
 		
 		displayAllMenu();
 		displayAllDesigner();

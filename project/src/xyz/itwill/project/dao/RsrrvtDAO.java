@@ -150,7 +150,7 @@ public class RsrrvtDAO extends JdbcDAO {
 
 	}
 
-	public List<RsrrvtDTO> selectRsrrvtbyRdate(String rdate) {
+	public List<RsrrvtDTO> selectRsrrvtbyRdate(String rdate, String rdname) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -160,10 +160,12 @@ public class RsrrvtDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rdate = ? order by rdate desc, rtime desc";
+//			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rdate = ? order by rdate desc, rtime desc";
+			String sql = "select rno,rdate,rtime,designer.name dname,member.name cname,menu.value mvalue,payment,cash,status,rsrrvt.memo memo from rsrrvt join member on member.id = rsrrvt.rcid join designer on designer.id = rsrrvt.rdid join menu on menu.mno = rsrrvt.menu_no where rdate = ? and designer.name = ? order by rdate desc, rtime desc";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, rdate);
+			pstmt.setString(2, rdname);
 
 			rs = pstmt.executeQuery();
 
