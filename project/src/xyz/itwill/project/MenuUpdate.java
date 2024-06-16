@@ -6,19 +6,24 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import xyz.itwill.project.dao.MenuDAO;
+import xyz.itwill.project.dao.MenuDTO;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class MenuUpdate extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField mpricetextField;
-	private JTextField mvaluetextField;
-	private JTextField mtimetextField;
+	private JTextField priceTF;
+	private JTextField valueTF;
+	private JTextField mtimeTF;
 	private JTextField mnotextField;
 
 	// 시술 변경 변수 //
@@ -76,14 +81,14 @@ public class MenuUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		}
 		{
-			mvaluetextField = new JTextField();
-			GridBagConstraints gbc_mvaluetextField = new GridBagConstraints();
-			gbc_mvaluetextField.insets = new Insets(0, 0, 5, 5);
-			gbc_mvaluetextField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_mvaluetextField.gridx = 2;
-			gbc_mvaluetextField.gridy = 2;
-			contentPanel.add(mvaluetextField, gbc_mvaluetextField);
-			mvaluetextField.setColumns(10);
+			valueTF = new JTextField();
+			GridBagConstraints gbc_valueTF = new GridBagConstraints();
+			gbc_valueTF.insets = new Insets(0, 0, 5, 5);
+			gbc_valueTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_valueTF.gridx = 2;
+			gbc_valueTF.gridy = 2;
+			contentPanel.add(valueTF, gbc_valueTF);
+			valueTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_1 = new JLabel("시술 시간");
@@ -95,14 +100,14 @@ public class MenuUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		}
 		{
-			mtimetextField = new JTextField();
-			GridBagConstraints gbc_mtimetextField = new GridBagConstraints();
-			gbc_mtimetextField.insets = new Insets(0, 0, 5, 5);
-			gbc_mtimetextField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_mtimetextField.gridx = 2;
-			gbc_mtimetextField.gridy = 3;
-			contentPanel.add(mtimetextField, gbc_mtimetextField);
-			mtimetextField.setColumns(10);
+			mtimeTF = new JTextField();
+			GridBagConstraints gbc_mtimeTF = new GridBagConstraints();
+			gbc_mtimeTF.insets = new Insets(0, 0, 5, 5);
+			gbc_mtimeTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_mtimeTF.gridx = 2;
+			gbc_mtimeTF.gridy = 3;
+			contentPanel.add(mtimeTF, gbc_mtimeTF);
+			mtimeTF.setColumns(10);
 		}
 		{
 			JLabel lblNewLabel_2 = new JLabel("시술 가격");
@@ -114,14 +119,14 @@ public class MenuUpdate extends JDialog {
 			contentPanel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		}
 		{
-			mpricetextField = new JTextField();
-			GridBagConstraints gbc_mpricetextField = new GridBagConstraints();
-			gbc_mpricetextField.insets = new Insets(0, 0, 0, 5);
-			gbc_mpricetextField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_mpricetextField.gridx = 2;
-			gbc_mpricetextField.gridy = 4;
-			contentPanel.add(mpricetextField, gbc_mpricetextField);
-			mpricetextField.setColumns(10);
+			priceTF = new JTextField();
+			GridBagConstraints gbc_priceTF = new GridBagConstraints();
+			gbc_priceTF.insets = new Insets(0, 0, 0, 5);
+			gbc_priceTF.fill = GridBagConstraints.HORIZONTAL;
+			gbc_priceTF.gridx = 2;
+			gbc_priceTF.gridy = 4;
+			contentPanel.add(priceTF, gbc_priceTF);
+			priceTF.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -144,8 +149,9 @@ public class MenuUpdate extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 
 				okButton.addActionListener(e -> {
-
-					dispose();
+					updateMenu();
+					administratorLogin.displayAllMenu();
+//					dispose();
 				});
 			}
 			{
@@ -157,7 +163,6 @@ public class MenuUpdate extends JDialog {
 				gbc_cancelButton.gridx = 2;
 				gbc_cancelButton.gridy = 0;
 				buttonPane.add(cancelButton, gbc_cancelButton);
-				
 
 				cancelButton.addActionListener(e -> {
 					dispose();
@@ -167,14 +172,66 @@ public class MenuUpdate extends JDialog {
 
 		if (pushMno != 0) {
 			mnotextField.setText(String.valueOf(pushMno));
-			mvaluetextField.setText(String.valueOf(pushValue));
-			mtimetextField.setText(String.valueOf(pushMtime));
-			mpricetextField.setText(String.valueOf(pushPrice));
+			valueTF.setText(String.valueOf(pushValue));
+			mtimeTF.setText(String.valueOf(pushMtime));
+			priceTF.setText(String.valueOf(pushPrice));
 		}
 
 //		this.pushValue = administratorLogin.pushValue;
 //		this.pushMtime = administratorLogin.pushMtime;
 //		this.pushPrice = administratorLogin.pushPrice;	
+	}
+
+	public void updateMenu() {
+
+		String value = valueTF.getText();
+
+		if (value.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 종류를 입력해 주세요.");
+			valueTF.requestFocus();
+			return;
+		}
+
+		String mtimeString = mtimeTF.getText();
+
+		if (mtimeString.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 시간을 입력해 주세요.");
+			mtimeTF.requestFocus();
+			return;
+		}
+
+		int mtime = Integer.parseInt(mtimeString);
+
+		String priceString = priceTF.getText();
+
+		if (priceString.equals("")) {
+			JOptionPane.showMessageDialog(this, "시술 가격을 입력해 주세요.");
+			priceTF.requestFocus();
+			return;
+		}
+
+		int price = Integer.parseInt(priceString);
+
+		MenuDTO menu = new MenuDTO();
+		menu.setValue(value);
+		menu.setMtime(mtime);
+		menu.setPrice(price);
+		menu.setMno(pushMno);
+
+		int rows = MenuDAO.getDAO().updateMenu(menu);
+
+		if (rows > 0) {
+			JOptionPane.showMessageDialog(this, rows + "개의 시술을 수정 하였습니다.");
+			dispose();
+			// TF 초기화
+			valueTF.setText("");
+			mtimeTF.setText("");
+			priceTF.setText("");
+
+		} else {
+			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
+		}
+
 	}
 
 }
