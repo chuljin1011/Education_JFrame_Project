@@ -293,7 +293,7 @@ public class DesignerUpdate extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 
 				okButton.addActionListener(e -> {
-					updateMenu();
+					updateDesigner();
 					administratorLogin.displayAllDesigner();
 					dispose();
 				});
@@ -321,17 +321,17 @@ public class DesignerUpdate extends JDialog {
 			birthTF.setText(pushbirth);
 			nameTF.setText(pushname);
 			genderTF.setText(pushgender);
-			phoneTF.setText(pushrank);
-			rankTF.setText(String.valueOf(pushsal));
-			salTF.setText(pushhire_date);
-			hire_dateTF.setText(pushphone);
+			phoneTF.setText(pushphone);
+			rankTF.setText(pushrank);
+			salTF.setText(String.valueOf(pushsal));
+			hire_dateTF.setText(pushhire_date);
 			careerTF.setText(String.valueOf(pushcareer));
 
 		}
 
 	}
 
-	public void updateMenu() {
+	public void updateDesigner() {
 		
 		String pw = pwTF.getText();
 
@@ -404,13 +404,13 @@ public class DesignerUpdate extends JDialog {
 		DesignerDTO designer = new DesignerDTO();
 		designer.setId(pushid);
 		designer.setPw(pw);
-		designer.setBirth(birth.substring(0,10));
+		designer.setBirth(birth);
 		designer.setName(name);
 		designer.setGender(gender);
 		designer.setPhone(phone);
 		designer.setRank(rank);
 		designer.setSal(sal);
-		designer.setHire_date(hire_date.substring(0,10));
+		designer.setHire_date(hire_date);
 		designer.setCareer(career);
 
 		int rows = DesignerDAO.getDAO().updateDesigner(designer);
