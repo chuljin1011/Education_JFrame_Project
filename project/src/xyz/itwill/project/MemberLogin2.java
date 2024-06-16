@@ -177,6 +177,15 @@ public class MemberLogin2 extends JFrame {
 		buttonPane.setLayout(null);
 		{
 			JButton okButton = new JButton("로그아웃");
+			okButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					setVisible(false);
+					MainLogin mainLogin = new MainLogin();
+					mainLogin.setVisible(true);
+					
+				}
+			});
 			okButton.setBounds(12, 6, 95, 30);
 			okButton.setActionCommand("OK");
 			buttonPane.add(okButton);
