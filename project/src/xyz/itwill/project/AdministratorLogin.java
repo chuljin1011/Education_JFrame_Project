@@ -249,11 +249,11 @@ public class AdministratorLogin extends JFrame {
 
 		lblNewLabel = new JLabel("시술번호 : ");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(12, 30, 75, 15);
+		lblNewLabel.setBounds(12, 30, 103, 15);
 		panel.add(lblNewLabel);
 
 		textField = new JTextField();
-		textField.setBounds(88, 26, 217, 23);
+		textField.setBounds(117, 26, 188, 23);
 		panel.add(textField);
 		textField.setColumns(10);
 
