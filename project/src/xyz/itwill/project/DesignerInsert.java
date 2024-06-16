@@ -402,6 +402,20 @@ public class DesignerInsert extends JDialog {
 			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
 		}		
 		
+		// TF 초기화
+		idTF.setText("");
+		pwTF.setText("");
+		birthTF.setText("");
+		nameTF.setText("");
+		genderTF.setText("");
+		phoneTF.setText("");
+		rankTF.setText("");
+		salTF.setText("");
+		hire_dateTF.setText("");
+		careerTF.setText("");
+						
+		
+		
 	}
 
 }

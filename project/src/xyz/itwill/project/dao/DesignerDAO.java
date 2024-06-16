@@ -37,12 +37,13 @@ public class DesignerDAO extends JdbcDAO {
 			pstmt.setString(1, designer.getId());
 			pstmt.setString(2, designer.getPw());
 			pstmt.setString(3, designer.getBirth());
+			System.out.println(designer.getBirth());
 			pstmt.setString(4, designer.getName());
 			pstmt.setString(5, designer.getGender());
-			pstmt.setString(6, designer.getPhone());
-			pstmt.setString(7, designer.getRank());
-			pstmt.setInt(8, designer.getSal());
-			pstmt.setString(9, designer.getHire_date());
+			pstmt.setString(6, designer.getRank());
+			pstmt.setInt(7, designer.getSal());
+			pstmt.setString(8, designer.getHire_date());
+			pstmt.setString(9, designer.getPhone());   
 			pstmt.setInt(10, designer.getCareer());
 
 			rows = pstmt.executeUpdate();

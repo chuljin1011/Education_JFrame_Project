@@ -56,7 +56,7 @@ public class AdministratorLogin extends JFrame {
 	
 	// Update Frame
 	MenuUpdate menuUpdatedialog;
-//	DesignerUpdate designerUpdatedialog;
+	DesignerUpdate designerUpdatedialog;
 //	MemberUpdate memberUpdatedialog;
 //	ReservationUpdate reservationUpdatedialog;
 	
@@ -80,6 +80,7 @@ public class AdministratorLogin extends JFrame {
 	
 	 
 	
+	TableRowSorter<DefaultTableModel> sorter;
 	 
 	
 	/**
@@ -117,7 +118,7 @@ public class AdministratorLogin extends JFrame {
 		
 		//update Frame
 		menuUpdatedialog = new MenuUpdate(this);
-//		designerUpdatedialog = new DesignerUpdate(this);
+		designerUpdatedialog = new DesignerUpdate(this);
 //		memberUpdatedialog = new MemberUpdate();
 //		reservationUpdatedialog = new ReservationUpdate();
 				
@@ -268,8 +269,8 @@ public class AdministratorLogin extends JFrame {
 					menuUpdatedialog.setVisible(true);
 					break;
 				case 1 :
-//					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
-//					designerUpdatedialog.setVisible(true);
+					designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
+					designerUpdatedialog.setVisible(true);
 					break;
 				case 2 :
 					MemberUpdate memberUpdatedialog = new MemberUpdate();
@@ -312,6 +313,26 @@ public class AdministratorLogin extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnNewButton_2_1 = new JButton("초기화");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				sorter.setRowFilter(null);
+//				displayAllMenu();
+//				displayAllDesigner();
+//				displayAllmember();	
+//				displayAllRsrrvt();
+				
+				
+			}
+		});
+		GridBagConstraints gbc_btnNewButton_2_1 = new GridBagConstraints();
+		gbc_btnNewButton_2_1.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton_2_1.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2_1.gridx = 3;
+		gbc_btnNewButton_2_1.gridy = 1;
+		panel.add(btnNewButton_2_1, gbc_btnNewButton_2_1);
 		
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
@@ -399,7 +420,8 @@ public class AdministratorLogin extends JFrame {
 	        return;
 	    }
 
-	    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+//	    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
+	     sorter = new TableRowSorter<>(tableModel);
 
 	    try {
 	        sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + searchText + ".*", columnIndex));
@@ -489,6 +511,8 @@ public class AdministratorLogin extends JFrame {
 		}
 		
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table_1.getModel();
+		
+		defaultTableModel.setNumRows(0);
 				
 		for(MemberDTO member : memberList) {
 			
@@ -516,6 +540,8 @@ public class AdministratorLogin extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) table_3.getModel();
+		
+		defaultTableModel.setNumRows(0);
 
 		for (RsrrvtDTO rsrrvt : rsrrvtList) {
 			

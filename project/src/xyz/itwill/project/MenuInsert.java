@@ -252,7 +252,7 @@ public class MenuInsert extends JDialog {
 		int price=Integer.parseInt(priceString);
 		
 		MenuDTO menu=new MenuDTO();
-		//menu.setMno(mno);
+		//menu.setMno(mno); // 시퀀스 처리
 		menu.setValue(value);
 		menu.setMtime(mtime);
 		menu.setPrice(price);
@@ -266,6 +266,12 @@ public class MenuInsert extends JDialog {
 		} else {
 			JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
 		}		
+		
+		// TF 초기화
+		valueTF.setText("");
+		mtimeTF.setText("");
+		priceTF.setText("");
+		
 		
 	}
 }

@@ -280,6 +280,8 @@ public class MemberInsert extends JDialog {
 						dispose(); 
 					});
 					
+					
+					
 				}
 			}
 		}
@@ -346,11 +348,11 @@ public class MemberInsert extends JDialog {
 		
 		String memo=memoTF.getText();
 		
-		if(memo.equals("")) {
-			JOptionPane.showMessageDialog(this, "메모를 입력해 주세요.");
-			memoTF.requestFocus();
-			return;
-		}
+//		if(memo.equals("")) {
+//			JOptionPane.showMessageDialog(this, "메모를 입력해 주세요.");
+//			memoTF.requestFocus();
+//			return;
+//		}
 		
 		
 		MemberDTO member=new MemberDTO();		
@@ -373,6 +375,17 @@ public class MemberInsert extends JDialog {
 		} else {
 		JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
 		}		
+		
+		// TF 초기화
+		idTF.setText("");
+		pwTF.setText("");
+		birthTF.setText("");
+		nameTF.setText("");
+		genderTF.setText("");
+		phoneTF.setText("");
+		join_dateTF.setText("");
+		used_countTF.setText("");
+		memoTF.setText("");
 		
 	}
 }

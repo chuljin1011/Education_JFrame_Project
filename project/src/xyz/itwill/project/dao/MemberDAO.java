@@ -39,12 +39,23 @@ public class MemberDAO extends JdbcDAO {
 			pstmt.setString(3, member.getBirth());
 			pstmt.setString(4, member.getName());
 			pstmt.setString(5, member.getGender());
-			pstmt.setString(6, member.getPhone());
-			pstmt.setString(7, member.getJoin_date());
-			pstmt.setInt(8, member.getUsed_count());
-			pstmt.setString(9, member.getMemo());
+			pstmt.setString(6, member.getJoin_date());
+			pstmt.setInt(7, member.getUsed_count());
+			pstmt.setString(8, member.getMemo());
+			pstmt.setString(9, member.getPhone());
+			
+			System.out.println(member.getId());
+			System.out.println(member.getPw());
+			System.out.println(member.getBirth());
+			System.out.println(member.getName());
+			System.out.println( member.getGender());
+			System.out.println(member.getJoin_date());
+			System.out.println(member.getUsed_count());
+			System.out.println(member.getMemo());
+			System.out.println(member.getPhone());
 			
 			rows = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			System.out.println("[에러]insertMember() 메소드의 SQL 오류 = " + e.getMessage());
 		} finally {

@@ -6,32 +6,26 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import xyz.itwill.project.dao.MenuDAO;
-import xyz.itwill.project.dao.MenuDTO;
-
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class MenuUpdate extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField mnotextField;
 	private JTextField mpricetextField;
 	private JTextField mvaluetextField;
 	private JTextField mtimetextField;
+	private JTextField mnotextField;
 
 	// 시술 변경 변수 //
 	int pushMno;
 	String pushValue;
 	int pushMtime;
 	int pushPrice;
-	private JTextField textField;
 
 	public MenuUpdate(AdministratorLogin administratorLogin) {
 		setTitle("시술 수정");
@@ -56,18 +50,20 @@ public class MenuUpdate extends JDialog {
 			JLabel lblNewLabel = new JLabel("시술 번호");
 			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 			gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+			gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 			gbc_lblNewLabel.gridx = 1;
 			gbc_lblNewLabel.gridy = 1;
 			contentPanel.add(lblNewLabel, gbc_lblNewLabel);
 		}
 		{
 			mnotextField = new JTextField();
-			GridBagConstraints gbc_textField = new GridBagConstraints();
-			gbc_textField.insets = new Insets(0, 0, 5, 5);
-			gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-			gbc_textField.gridx = 2;
-			gbc_textField.gridy = 1;
-			contentPanel.add(textField, gbc_textField);
+			mnotextField.setEditable(false);
+			GridBagConstraints gbc_mnotextField = new GridBagConstraints();
+			gbc_mnotextField.insets = new Insets(0, 0, 5, 5);
+			gbc_mnotextField.fill = GridBagConstraints.HORIZONTAL;
+			gbc_mnotextField.gridx = 2;
+			gbc_mnotextField.gridy = 1;
+			contentPanel.add(mnotextField, gbc_mnotextField);
 			mnotextField.setColumns(10);
 		}
 		{
@@ -169,64 +165,16 @@ public class MenuUpdate extends JDialog {
 			}
 		}
 
-		if (pushMno != 0) {	
+		if (pushMno != 0) {
 			mnotextField.setText(String.valueOf(pushMno));
 			mvaluetextField.setText(String.valueOf(pushValue));
 			mtimetextField.setText(String.valueOf(pushMtime));
 			mpricetextField.setText(String.valueOf(pushPrice));
 		}
-	}
-		
-		public void modifyMenu() {		
-			
-			String value=mvaluetextField.getText();
-			
-			if(value.equals("")) {
-				JOptionPane.showMessageDialog(this, "시술 종류를 수정해 주세요.");
-				mvaluetextField.requestFocus();
-				return;
-			}
-			
-			String mtimeString=mvaluetextField.getText();
-			
-			if(mtimeString.equals("")) {
-				JOptionPane.showMessageDialog(this, "시술 시간을 수정해 주세요.");
-				mvaluetextField.requestFocus();
-				return;
-			}
-	
-			int mtime=Integer.parseInt(mtimeString);
-			
-			String priceString=mpricetextField.getText();
-			
-			if(priceString.equals("")) {
-				JOptionPane.showMessageDialog(this, "시술 가격을 수정해 주세요.");
-				mpricetextField.requestFocus();
-				return;
-			}
-	
-			int price=Integer.parseInt(priceString);
-			
-			MenuDTO menu=new MenuDTO();			
-			menu.setValue(value);
-			menu.setMtime(mtime);
-			menu.setPrice(price);
-			
-			int rows=MenuDAO.getDAO().updateMenu(menu);
-			
-			if (rows > 0) {
-			JOptionPane.showMessageDialog(this, rows+"개의 시술을 삽입하여 수정 하였습니다.");
-			dispose();
-			
-			} else {
-				JOptionPane.showMessageDialog(this, "입력 양식에 맞는 값을 입력해주세요");
-			}		
-			
-		
-		}
 
 //		this.pushValue = administratorLogin.pushValue;
 //		this.pushMtime = administratorLogin.pushMtime;
 //		this.pushPrice = administratorLogin.pushPrice;	
+	}
 
 }

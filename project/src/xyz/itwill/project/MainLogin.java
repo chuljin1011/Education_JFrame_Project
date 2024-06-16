@@ -154,14 +154,14 @@ public class MainLogin extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("로그인");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(chckbxMember.isSelected()) {									
-				} else if(chckbxAdmin.isSelected()) {
-					
-				}
-			}
-		});
+//		btnNewButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				if(chckbxMember.isSelected()) {									
+//				} else if(chckbxAdmin.isSelected()) {
+//					
+//				}
+//			}
+//		});
 		
 		
 		
@@ -224,16 +224,18 @@ public class MainLogin extends JFrame {
 		        	
 		        	DesignerDTO designer = DesignerDAO.getDAO().selectDesignerByID(login_id);
 		        	if(designer == null) {	// 해당 id가 존재하지 않는경우
-		    			JOptionPane.showMessageDialog(MainLogin.this, "ID가 존재하지 않습니다.");
+		    			JOptionPane.showMessageDialog(null, "ID가 존재하지 않습니다.");
 		    			idField.requestFocus();
 		    			return;
 		        	}
 		        	
 		        	login_name = designer.getName();        
 		        	if(designer.getPw().equals(pwField.getText())) {
-			        	AdministratorLogin administratorLogin = new AdministratorLogin();
-			        	administratorLogin.setVisible(true);
+
+//			        	AdministratorLogin administratorLogin = new AdministratorLogin();
+//			        	administratorLogin.setVisible(true);
 		        		setVisible(false);
+
 		        		
 		        	} else {
 		        		JOptionPane.showMessageDialog(null, "비밀번호가 맞지 않습니다.");
