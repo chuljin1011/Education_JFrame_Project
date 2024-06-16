@@ -37,7 +37,6 @@ public class DesignerDAO extends JdbcDAO {
 			pstmt.setString(1, designer.getId());
 			pstmt.setString(2, designer.getPw());
 			pstmt.setString(3, designer.getBirth());
-			System.out.println(designer.getBirth());
 			pstmt.setString(4, designer.getName());
 			pstmt.setString(5, designer.getGender());
 			pstmt.setString(6, designer.getRank());
@@ -64,17 +63,17 @@ public class DesignerDAO extends JdbcDAO {
 		try {
 			con = getConnection();
 
-			String sql = "update designer set pw=?,birth=?,name=?,gender=?,phone=?,rank=?,sal=?,hire_date=?,career=? where id=?";
+			String sql = "update designer set pw=?,birth=?,name=?,gender=?,rank=?,sal=?,hire_date=?,phone=?,career=? where id=?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, designer.getPw());
 			pstmt.setString(2, designer.getBirth());
 			pstmt.setString(3, designer.getName());
 			pstmt.setString(4, designer.getGender());
-			pstmt.setString(5, designer.getPhone());
-			pstmt.setString(6, designer.getRank());
-			pstmt.setInt(7, designer.getSal());
-			pstmt.setString(8, designer.getHire_date());
+			pstmt.setString(5, designer.getRank());
+			pstmt.setInt(6, designer.getSal());
+			pstmt.setString(7, designer.getHire_date());
+			pstmt.setString(8, designer.getPhone());
 			pstmt.setInt(9, designer.getCareer());
 			pstmt.setString(10, designer.getId());
 

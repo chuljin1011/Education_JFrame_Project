@@ -42,10 +42,10 @@ public class AdministratorLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
-	private JTable table_1;
+	private JTable dTable;
+	private JTable cTable;
 	private JTable mTable;
-	private JTable table_3;
+	private JTable rTable;
 
 	// Insert Frame
 	MenuInsert menuInsertdialog;
@@ -64,17 +64,35 @@ public class AdministratorLogin extends JFrame {
 	String pushValue;
 	int pushMtime;
 	int pushPrice;
-	private JTextField textField;
 
 	// 디자이너 변경 변수 //
+	String pushid;
+	String pushPw;
+	String pushbirth;
+	String pushname;
+	String pushgender;
+	String pushrank;
+	int pushsal;
+	String pushhire_date;
+	String pushphone;
+	int pushcareer;
+
+	
+
+	
 
 	// 회원 변경 변수 //
+	
+	
 
 	// 예약 변경 변수 //
 
+	
+	// 그외
 	TableRowSorter<DefaultTableModel> sorter;
 	private JLabel lblNewLabel;
 	private JTabbedPane tabbedPane;
+	private JTextField textField;
 
 //	
 //	/**
@@ -156,38 +174,73 @@ public class AdministratorLogin extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		tabbedPane.addTab("디자이너 관리", null, scrollPane, null);
 
-		table = new JTable();
-//		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(new Object[][] {},
+		dTable = new JTable();
+		dTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane.setViewportView(dTable);
+		dTable.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "아이디", "비밀번호", "생년월일", "이름", "성별", "핸드폰번호", "직급", "급여", "고용일", "경력" }));
-		table.getTableHeader().setReorderingAllowed(false);
-		table.getTableHeader().setResizingAllowed(false);
-		table.getColumnModel().getColumn(5).setPreferredWidth(150);
+		dTable.getTableHeader().setReorderingAllowed(false);
+		dTable.getTableHeader().setResizingAllowed(false);
+		dTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+		
+		dTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (!e.getValueIsAdjusting()) {
+					if (dTable.getSelectedRow() >= 0) {
+						int selectedRow = dTable.getSelectedRow();
+
+
+						String id = (String) (dTable.getValueAt(selectedRow, 0));
+						String pw = (String) (dTable.getValueAt(selectedRow, 1));
+						String birth = (String) (dTable.getValueAt(selectedRow, 2));
+						String name = (String) (dTable.getValueAt(selectedRow, 3));
+						String gender = (String) (dTable.getValueAt(selectedRow, 4));
+						String phone = (String) (dTable.getValueAt(selectedRow, 5));
+						String rank = (String) (dTable.getValueAt(selectedRow, 6));
+						Integer sal = (Integer) (dTable.getValueAt(selectedRow, 7));
+						String hire_date = (String) (dTable.getValueAt(selectedRow, 8));
+						Integer career = (Integer) (dTable.getValueAt(selectedRow, 9));
+
+						pushid = id;
+						pushPw = pw;
+						pushbirth = birth;
+						pushname = name;
+						pushgender = gender;
+						pushrank = rank;
+						pushsal = sal;
+						pushhire_date = hire_date;
+						pushphone = phone;
+						pushcareer = career;
+					}
+				}
+			}
+		});
+		
 
 		JScrollPane scrollPane_1 = new JScrollPane();
 		tabbedPane.addTab("회원 관리", null, scrollPane_1, null);
 
-		table_1 = new JTable();
-		table_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_1.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(new Object[][] {},
+		cTable = new JTable();
+		cTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_1.setViewportView(cTable);
+		cTable.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "아이디", "비밀번호", "생년월일", "이름", "성별", "핸드폰번호", "가입일", "이용횟수", "메모" }));
-		table_1.getTableHeader().setReorderingAllowed(false);
-		table_1.getTableHeader().setResizingAllowed(false);
-		table_1.getColumnModel().getColumn(5).setPreferredWidth(150);
-		table_1.getColumnModel().getColumn(8).setPreferredWidth(150);
+		cTable.getTableHeader().setReorderingAllowed(false);
+		cTable.getTableHeader().setResizingAllowed(false);
+		cTable.getColumnModel().getColumn(5).setPreferredWidth(150);
+		cTable.getColumnModel().getColumn(8).setPreferredWidth(150);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
 		tabbedPane.addTab("예약 관리", null, scrollPane_3, null);
 
-		table_3 = new JTable();
-		table_3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		scrollPane_3.setViewportView(table_3);
-		table_3.setModel(new DefaultTableModel(new Object[][] {},
+		rTable = new JTable();
+		rTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollPane_3.setViewportView(rTable);
+		rTable.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "번호", "날짜", "시간", "디자이너", "회원", "시술", "결제금액", "현금여부", "예약상태", "메모" }));
-		table_3.getTableHeader().setReorderingAllowed(false);
-		table_3.getTableHeader().setResizingAllowed(false);
+		rTable.getTableHeader().setReorderingAllowed(false);
+		rTable.getTableHeader().setResizingAllowed(false);
 
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 481, 780, 80);
@@ -218,15 +271,15 @@ public class AdministratorLogin extends JFrame {
 					performTableSearch(menuTableModel, searchText, 0);
 					break;
 				case 1:
-					DefaultTableModel designerTableModel = (DefaultTableModel) table.getModel();
+					DefaultTableModel designerTableModel = (DefaultTableModel) dTable.getModel();
 					performTableSearch(designerTableModel, searchText, 0);
 					break;
 				case 2:
-					DefaultTableModel memberTableModel = (DefaultTableModel) table_1.getModel();
+					DefaultTableModel memberTableModel = (DefaultTableModel) cTable.getModel();
 					performTableSearch(memberTableModel, searchText, 0);
 					break;
 				case 3:
-					DefaultTableModel reservationTableModel = (DefaultTableModel) table_3.getModel();
+					DefaultTableModel reservationTableModel = (DefaultTableModel) rTable.getModel();
 					performTableSearch(reservationTableModel, searchText, 0);
 					break;
 				default:
@@ -287,31 +340,46 @@ public class AdministratorLogin extends JFrame {
 
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (mTable.getSelectedRow() >= 0) {
-					int sel = tabbedPane.getSelectedIndex();
+				int sel = tabbedPane.getSelectedIndex();
 					switch (sel) {
 					case 0:
+						if (mTable.getSelectedRow() >= 0) {   													  /// 테이블 셀렉션
 						menuUpdatedialog = new MenuUpdate(AdministratorLogin.this);
 						menuUpdatedialog.setVisible(true);
 						break;
+						} else {
+						JOptionPane.showMessageDialog(null, "수정 할 메뉴를 선택해주세요.");
+						break;
+					}
+						
 					case 1:
+						if (dTable.getSelectedRow() >= 0) {   
 						designerUpdatedialog = new DesignerUpdate(AdministratorLogin.this);
 						designerUpdatedialog.setVisible(true);
 						break;
+						} else {
+							JOptionPane.showMessageDialog(null, "수정 할 메뉴를 선택해주세요.");
+							break;
+						}
 					case 2:
+//						if (cTable.getSelectedRow() >= 0) {  
 						MemberUpdate memberUpdatedialog = new MemberUpdate();
 						memberUpdatedialog.setVisible(true);
 						break;
+//						}
 					case 3:
+//						if (dTable.getSelectedRow() >= 0) {  
 						ReservationUpdate reservationUpdatedialog = new ReservationUpdate();
 						reservationUpdatedialog.setVisible(true);
 						break;
+//						}
 					default:
 						break;
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "수정할 메뉴를 선택해주세요.");
-				}
+			
+//				} else {
+//					JOptionPane.showMessageDialog(null, "수정 할 메뉴를 선택해주세요.");
+//				}
 
 			}
 		});
@@ -335,27 +403,27 @@ public class AdministratorLogin extends JFrame {
 					}
 					break;
 				case 1:
-					int selectedDesignerRow = table.getSelectedRow();
+					int selectedDesignerRow = dTable.getSelectedRow();
 					if (selectedDesignerRow != -1) {
-						String id = (String) table.getValueAt(selectedDesignerRow, 0);
+						String id = (String) dTable.getValueAt(selectedDesignerRow, 0);
 						removedesigner(id);
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 디자이너를 선택해주세요.");
 					}
 					break;
 				case 2:
-					int selectedMemberRow = table_1.getSelectedRow();
+					int selectedMemberRow = cTable.getSelectedRow();
 					if (selectedMemberRow != -1) {
-						String id = (String) table_1.getValueAt(selectedMemberRow, 0);
+						String id = (String) cTable.getValueAt(selectedMemberRow, 0);
 						removeMember(id);
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 회원을 선택해주세요.");
 					}
 					break;
 				case 3:
-					int selectedRsrrvtRow = table_3.getSelectedRow();
+					int selectedRsrrvtRow = rTable.getSelectedRow();
 					if (selectedRsrrvtRow != -1) {
-						int rno = (int) table_3.getValueAt(selectedRsrrvtRow, 0);
+						int rno = (int) rTable.getValueAt(selectedRsrrvtRow, 0);
 						removeRsrrvt(rno);
 					} else {
 						JOptionPane.showMessageDialog(null, "삭제할 예약을 선택해주세요.");
@@ -410,12 +478,12 @@ public class AdministratorLogin extends JFrame {
 			sorter.setRowFilter(RowFilter.regexFilter("(?i).*" + searchText + ".*", columnIndex));
 			if (tableModel == mTable.getModel()) {
 				mTable.setRowSorter(sorter);
-			} else if (tableModel == table.getModel()) {
-				table.setRowSorter(sorter);
-			} else if (tableModel == table_1.getModel()) {
-				table_1.setRowSorter(sorter);
-			} else if (tableModel == table_3.getModel()) {
-				table_3.setRowSorter(sorter);
+			} else if (tableModel == dTable.getModel()) {
+				dTable.setRowSorter(sorter);
+			} else if (tableModel == cTable.getModel()) {
+				cTable.setRowSorter(sorter);
+			} else if (tableModel == rTable.getModel()) {
+				rTable.setRowSorter(sorter);
 			}
 
 			JOptionPane.showMessageDialog(this, "검색을 완료했습니다.");
@@ -462,7 +530,7 @@ public class AdministratorLogin extends JFrame {
 			return;
 		}
 
-		DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
+		DefaultTableModel defaultTableModel = (DefaultTableModel) dTable.getModel();
 
 		defaultTableModel.setNumRows(0);
 
@@ -492,7 +560,7 @@ public class AdministratorLogin extends JFrame {
 			return;
 		}
 
-		DefaultTableModel defaultTableModel = (DefaultTableModel) table_1.getModel();
+		DefaultTableModel defaultTableModel = (DefaultTableModel) cTable.getModel();
 
 		defaultTableModel.setNumRows(0);
 
@@ -521,7 +589,7 @@ public class AdministratorLogin extends JFrame {
 			return;
 		}
 
-		DefaultTableModel defaultTableModel = (DefaultTableModel) table_3.getModel();
+		DefaultTableModel defaultTableModel = (DefaultTableModel) rTable.getModel();
 
 		defaultTableModel.setNumRows(0);
 
@@ -565,7 +633,7 @@ public class AdministratorLogin extends JFrame {
 
 		if (rows > 0) {
 			JOptionPane.showMessageDialog(null, rows + "개의 디자이너 정보를 삭제 하였습니다.");
-			DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
+			DefaultTableModel defaultTableModel = (DefaultTableModel) dTable.getModel();
 			defaultTableModel.setNumRows(0);
 			displayAllDesigner();
 
@@ -579,7 +647,7 @@ public class AdministratorLogin extends JFrame {
 
 		if (rows > 0) {
 			JOptionPane.showMessageDialog(null, rows + "개의 회원	정보를 삭제 하였습니다.");
-			DefaultTableModel defaultTableModel = (DefaultTableModel) table_1.getModel();
+			DefaultTableModel defaultTableModel = (DefaultTableModel) cTable.getModel();
 			defaultTableModel.setNumRows(0);
 			displayAllmember();
 
@@ -594,7 +662,7 @@ public class AdministratorLogin extends JFrame {
 
 		if (rows > 0) {
 			JOptionPane.showMessageDialog(null, rows + "개의 예약 정보를 삭제 하였습니다.");
-			DefaultTableModel defaultTableModel = (DefaultTableModel) table_3.getModel();
+			DefaultTableModel defaultTableModel = (DefaultTableModel) rTable.getModel();
 			defaultTableModel.setNumRows(0);
 			displayAllRsrrvt();
 
