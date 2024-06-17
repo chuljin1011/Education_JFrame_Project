@@ -51,32 +51,30 @@ public class MemberLogin2 extends JFrame {
 	private String login_id;
 	private String login_name;
 	private String get_date;
-	private int chk; 
+	private int chk;
 	private JComboBox ycomboBox;
 	private JComboBox mcomboBox;
 	private JComboBox dcomboBox;
 	private boolean getDate_Status;
 	private String rdName;
-	
-	private String final_Rdate;		
+
+	private String final_Rdate;
 	private int final_Rtime;
-	private String final_Rdid;  
-	private String final_Rdname;  
+	private String final_Rdid;
+	private String final_Rdname;
 //	private String final_Rcid;		login_id로 대체
 	private int final_Menu_No;
 	private String final_Memo;
 	private int final_Payment;
 	private String final_Cash;
 	private String final_Status;
-	
+
 	private String get_Rank;
-	
+
 	private JTextField select_Memo;
 	private JCheckBox cashCheckBox;
 	private JButton btnNewButton;
-	
-	
-	
+
 //	/**
 //	 * Launch the application.
 //	 */
@@ -98,9 +96,9 @@ public class MemberLogin2 extends JFrame {
 		setBounds(100, 100, 680, 734);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
+
 		this.login_id = login_id;
-		this.login_name = login_name;	
+		this.login_name = login_name;
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -118,7 +116,7 @@ public class MemberLogin2 extends JFrame {
 			JButton tButton = new JButton("<html><center><font size = 4>" + i + ":00<br>예약 가능</html>");
 			buttons[i - buttonTimeMin] = tButton;
 			tButton.setEnabled(false); // 조회전 비활성화
-			
+
 			panel.add(tButton);
 
 			if (i < openTime) {
@@ -148,25 +146,26 @@ public class MemberLogin2 extends JFrame {
 							String getYear = ycomboBox.getSelectedItem().toString();
 							String getMonth = mcomboBox.getSelectedItem().toString();
 							String getDay = dcomboBox.getSelectedItem().toString();
-							
-							final_Rdate = getYear+"-"+getMonth+"-"+getDay;
+
+							final_Rdate = getYear + "-" + getMonth + "-" + getDay;
 							final_Rtime = Integer.parseInt(actionbutton.getText().substring(29, 30));
-							select_Date.setText(getYear+"-"+getMonth+"-"+getDay+"  "+(actionbutton.getText().substring(29, 30)+"시"));
+							select_Date.setText(getYear + "-" + getMonth + "-" + getDay + "  "
+									+ (actionbutton.getText().substring(29, 30) + "시"));
 						} else {
 							String getYear = ycomboBox.getSelectedItem().toString();
 							String getMonth = mcomboBox.getSelectedItem().toString();
 							String getDay = dcomboBox.getSelectedItem().toString();
-							
-							final_Rdate = getYear+"-"+getMonth+"-"+getDay;
-							final_Rtime = Integer.parseInt(actionbutton.getText().substring(29, 31));
-							select_Date.setText(getYear+"-"+getMonth+"-"+getDay+"  "+(actionbutton.getText().substring(29, 31)+"시"));
 
-							
+							final_Rdate = getYear + "-" + getMonth + "-" + getDay;
+							final_Rtime = Integer.parseInt(actionbutton.getText().substring(29, 31));
+							select_Date.setText(getYear + "-" + getMonth + "-" + getDay + "  "
+									+ (actionbutton.getText().substring(29, 31) + "시"));
+
 						}
-						
+
 						btnNewButton.setEnabled(true); // 예약하기 버튼 활성화
-						
-					} 
+
+					}
 
 				}
 			});
@@ -179,11 +178,11 @@ public class MemberLogin2 extends JFrame {
 			JButton okButton = new JButton("로그아웃");
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+
 					setVisible(false);
 					MainLogin mainLogin = new MainLogin();
 					mainLogin.setVisible(true);
-					
+
 				}
 			});
 			okButton.setBounds(12, 6, 95, 30);
@@ -193,6 +192,11 @@ public class MemberLogin2 extends JFrame {
 		}
 		{
 			JButton cancelButton = new JButton("종료");
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
 			cancelButton.setBounds(112, 6, 65, 30);
 			cancelButton.setActionCommand("Cancel");
 			buttonPane.add(cancelButton);
@@ -237,7 +241,7 @@ public class MemberLogin2 extends JFrame {
 				get_date = getYear + "-" + getMonth + "-" + getDay;
 
 				getRdateRsrrvtData(get_date, rdName);
-				
+
 				getDate_Status = true;
 
 			}
@@ -260,18 +264,17 @@ public class MemberLogin2 extends JFrame {
 		mTable = new JTable();
 		mTable.setEnabled(false);
 		mscrollPane.setViewportView(mTable);
-		mTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "메뉴 번호","종류", "시술 시간", "가격" }));
+		mTable.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "메뉴 번호", "종류", "시술 시간", "가격" }));
 		mTable.getTableHeader().setReorderingAllowed(false);
 		mTable.getTableHeader().setResizingAllowed(false);
 		mTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				getDateButton.setEnabled(true);
-				
+
 			}
 		});
-		
 
 		// 메뉴 테이블 불러오기
 		DisplayAllMenu();
@@ -289,9 +292,9 @@ public class MemberLogin2 extends JFrame {
 						Integer price = (Integer) (mTable.getValueAt(selectedRow, 3));
 
 						select_mValue.setText(value);
-						
+
 						final_Menu_No = no;
-						final_Payment = price;						
+						final_Payment = price;
 
 					}
 				}
@@ -308,11 +311,11 @@ public class MemberLogin2 extends JFrame {
 		dTable.getTableHeader().setReorderingAllowed(false);
 		dTable.getTableHeader().setResizingAllowed(false);
 		dTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
+
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				mTable.setEnabled(true);
-				
+
 			}
 		});
 
@@ -332,7 +335,7 @@ public class MemberLogin2 extends JFrame {
 
 						select_dName.setText(name);
 						rdName = name;
-						
+
 						final_Rdname = name;
 						get_Rank = rank;
 
@@ -391,8 +394,6 @@ public class MemberLogin2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				addRsrrvt();
 
-				
-				
 			}
 		});
 		btnNewButton.setFont(new Font("굴림", Font.BOLD, 14));
@@ -426,28 +427,28 @@ public class MemberLogin2 extends JFrame {
 		lblNewLabel_3_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3_1.setBounds(22, 8, 60, 25);
 		contentPane.add(lblNewLabel_3_1);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(22, 648, 443, 43);
 		contentPane.add(panel_2);
 		panel_2.setLayout(null);
-		
+
 		JLabel lblNewLabel_2_2 = new JLabel("현금결제 :");
 		lblNewLabel_2_2.setFont(new Font("굴림", Font.BOLD, 14));
 		lblNewLabel_2_2.setBounds(12, 13, 80, 17);
 		panel_2.add(lblNewLabel_2_2);
-		
+
 		select_Memo = new JTextField();
 		select_Memo.setFont(new Font("굴림", Font.PLAIN, 14));
 		select_Memo.setColumns(10);
 		select_Memo.setBounds(187, 7, 253, 28);
 		panel_2.add(select_Memo);
-		
+
 		JLabel lblNewLabel_2_2_1 = new JLabel("요청사항 :");
 		lblNewLabel_2_2_1.setFont(new Font("굴림", Font.BOLD, 14));
 		lblNewLabel_2_2_1.setBounds(115, 13, 80, 17);
 		panel_2.add(lblNewLabel_2_2_1);
-		
+
 		cashCheckBox = new JCheckBox("");
 		cashCheckBox.setHorizontalAlignment(SwingConstants.CENTER);
 		cashCheckBox.setBounds(80, 8, 25, 25);
@@ -464,7 +465,7 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) dTable.getModel();
-		
+
 		defaultTableModel.setNumRows(0);
 
 		for (DesignerDTO designer : designerList) {
@@ -488,7 +489,7 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) mTable.getModel();
-		
+
 		defaultTableModel.setNumRows(0);
 
 		for (MenuDTO menu : menuList) {
@@ -496,7 +497,7 @@ public class MemberLogin2 extends JFrame {
 
 			rowData.add(menu.getMno());
 			rowData.add(menu.getValue());
-			rowData.add(menu.getMtime()+" 시간");
+			rowData.add(menu.getMtime() + " 시간");
 			rowData.add(menu.getPrice());
 
 			defaultTableModel.addRow(rowData);
@@ -513,7 +514,7 @@ public class MemberLogin2 extends JFrame {
 		}
 
 		DefaultTableModel defaultTableModel = (DefaultTableModel) rTable.getModel();
-		
+
 		defaultTableModel.setNumRows(0);
 
 		for (RsrrvtDTO rsrrvt : rsrrvtList) {
@@ -537,54 +538,42 @@ public class MemberLogin2 extends JFrame {
 
 	public void getRdateRsrrvtData(String rdate, String rdname) {
 		List<RsrrvtDTO> rsrrvtList = RsrrvtDAO.get_dao().selectRsrrvtbyRdate(rdate, rdname);
-		
-		
-		for (int i = openTime-buttonTimeMin; i <= (23-closeTime)+(openTime-1); i++) {
+
+		for (int i = openTime - buttonTimeMin; i <= (23 - closeTime) + (openTime - 1); i++) {
 			buttons[i].setBackground(Color.white);
 			buttons[i].setEnabled(true);
 			if (buttons[i].getText().contains("완료")) {
 				buttons[i].setText(buttons[i].getText().replace("완료", "가능"));
 			}
-				
-			
+
 		}
 
 		if (rsrrvtList.isEmpty()) { // 표 초기화 코드 제외
 			return;
 		}
 
+		for (RsrrvtDTO rsrrvt : rsrrvtList) {
 
-
-		
-		for (RsrrvtDTO rsrrvt : rsrrvtList) { 
-
-			chk = (rsrrvt.getRtime())-buttonTimeMin;
-			
-			
+			chk = (rsrrvt.getRtime()) - buttonTimeMin;
 
 			buttons[chk].setBackground(new Color(200, 140, 210));
 			buttons[chk].setText(buttons[chk].getText().replace("가능", "완료"));
 			buttons[chk].setEnabled(false);
 
-
-
 		}
 	}
-	
+
 	public void DesignerchangeNameToId() {
-		DesignerDTO designer=DesignerDAO.getDAO().selectDesignerByNameRank(final_Rdname, get_Rank);
-		
-		final_Rdid = designer.getId();		
+		DesignerDTO designer = DesignerDAO.getDAO().selectDesignerByNameRank(final_Rdname, get_Rank);
+
+		final_Rdid = designer.getId();
 		System.out.println(designer.getId());
-		
+
 	}
-	
-	
-	
+
 	public void addRsrrvt() {
 		DesignerchangeNameToId();
 
-		
 		if (select_dName.getText().isBlank()) {
 			JOptionPane.showMessageDialog(null, "디자이너를 선택해 주세요");
 			select_dName.requestFocus();
@@ -599,21 +588,19 @@ public class MemberLogin2 extends JFrame {
 			JOptionPane.showMessageDialog(null, "예약 날짜 및 시간을 선택해주세요.");
 			return;
 		}
-		
+
 		final_Memo = select_Memo.getText();
 		final_Status = "1";
-		
-		
+
 		if (cashCheckBox.isSelected()) {
 			final_Cash = "2";
 		} else {
 			final_Cash = "1";
-			
 
 		}
-		
+
 		RsrrvtDTO rsrrvt = new RsrrvtDTO();
-		
+
 		rsrrvt.setRdate(final_Rdate);
 		rsrrvt.setRtime(final_Rtime);
 		rsrrvt.setRdid(final_Rdid);
@@ -623,23 +610,17 @@ public class MemberLogin2 extends JFrame {
 		rsrrvt.setCash(final_Cash);
 		rsrrvt.setStatus(final_Status);
 		rsrrvt.setMemo(final_Memo);
-		
+
 		int rows = RsrrvtDAO.get_dao().insertRsrrvt(rsrrvt);
-		
+
 		if (rows > 0) {
-		JOptionPane.showMessageDialog(this, "예약이 완료 되었습니다.");
-		displayAllRsrrvt();
-		
+			JOptionPane.showMessageDialog(this, "예약이 완료 되었습니다.");
+			displayAllRsrrvt();
+
 		} else {
 			JOptionPane.showMessageDialog(this, "잘못된 접근으로 예약이 진행되지 못했습니다..");
 		}
-		
-		
+
 	}
-	
+
 }
-
-
-
-
-
